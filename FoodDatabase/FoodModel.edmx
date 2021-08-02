@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FoodServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fs_admin">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="a_username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="a_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fs_category">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="c_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="c_image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="c_res_id" Type="int" />
+        </EntityType>
+        <EntityType Name="fs_dish">
+          <Key>
+            <PropertyRef Name="d_id" />
+          </Key>
+          <Property Name="d_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="d_image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="d_res_id" Type="int" />
+          <Property Name="d_user_id" Type="int" />
+          <Property Name="d_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fs_order">
+          <Key>
+            <PropertyRef Name="o_id" />
+          </Key>
+          <Property Name="o_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="o_res_id" Type="int" />
+          <Property Name="o_dish_id" Type="int" />
+          <Property Name="o_dish_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="o_location" Type="nvarchar" MaxLength="50" />
+          <Property Name="o_time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="fs_restaurant">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="r_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="r_contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="r_location" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fs_user">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="u_firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="u_username" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__fs_catego__c_res__3B75D760">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_category" Type="Self.fs_category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_category">
+              <PropertyRef Name="c_res_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_dish__d_res_i__3E52440B">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_dish" Type="Self.fs_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_dish">
+              <PropertyRef Name="d_res_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_dish__d_user___3F466844">
+          <End Role="fs_user" Type="Self.fs_user" Multiplicity="0..1" />
+          <End Role="fs_dish" Type="Self.fs_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_user">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="fs_dish">
+              <PropertyRef Name="d_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_order__o_dish__440B1D61">
+          <End Role="fs_dish" Type="Self.fs_dish" Multiplicity="0..1" />
+          <End Role="fs_order" Type="Self.fs_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_dish">
+              <PropertyRef Name="d_id" />
+            </Principal>
+            <Dependent Role="fs_order">
+              <PropertyRef Name="o_dish_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_order__o_res___4316F928">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_order" Type="Self.fs_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_order">
+              <PropertyRef Name="o_res_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodServicesModelStoreContainer">
+          <EntitySet Name="fs_admin" EntityType="Self.fs_admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fs_category" EntityType="Self.fs_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fs_dish" EntityType="Self.fs_dish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fs_order" EntityType="Self.fs_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fs_restaurant" EntityType="Self.fs_restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fs_user" EntityType="Self.fs_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__fs_catego__c_res__3B75D760" Association="Self.FK__fs_catego__c_res__3B75D760">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_category" EntitySet="fs_category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_dish__d_res_i__3E52440B" Association="Self.FK__fs_dish__d_res_i__3E52440B">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_dish" EntitySet="fs_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_dish__d_user___3F466844" Association="Self.FK__fs_dish__d_user___3F466844">
+            <End Role="fs_user" EntitySet="fs_user" />
+            <End Role="fs_dish" EntitySet="fs_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_order__o_dish__440B1D61" Association="Self.FK__fs_order__o_dish__440B1D61">
+            <End Role="fs_dish" EntitySet="fs_dish" />
+            <End Role="fs_order" EntitySet="fs_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_order__o_res___4316F928" Association="Self.FK__fs_order__o_res___4316F928">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_order" EntitySet="fs_order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FoodServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="fs_admin">
+          <Key>
+            <PropertyRef Name="a_id" />
+          </Key>
+          <Property Name="a_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="a_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="a_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fs_category">
+          <Key>
+            <PropertyRef Name="c_id" />
+          </Key>
+          <Property Name="c_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="c_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="c_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="c_res_id" Type="Int32" />
+          <NavigationProperty Name="fs_restaurant" Relationship="Self.FK__fs_catego__c_res__3B75D760" FromRole="fs_category" ToRole="fs_restaurant" />
+        </EntityType>
+        <EntityType Name="fs_dish">
+          <Key>
+            <PropertyRef Name="d_id" />
+          </Key>
+          <Property Name="d_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="d_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="d_res_id" Type="Int32" />
+          <Property Name="d_user_id" Type="Int32" />
+          <Property Name="d_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="fs_restaurant" Relationship="Self.FK__fs_dish__d_res_i__3E52440B" FromRole="fs_dish" ToRole="fs_restaurant" />
+          <NavigationProperty Name="fs_user" Relationship="Self.FK__fs_dish__d_user___3F466844" FromRole="fs_dish" ToRole="fs_user" />
+          <NavigationProperty Name="fs_order" Relationship="Self.FK__fs_order__o_dish__440B1D61" FromRole="fs_dish" ToRole="fs_order" />
+        </EntityType>
+        <EntityType Name="fs_order">
+          <Key>
+            <PropertyRef Name="o_id" />
+          </Key>
+          <Property Name="o_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="o_res_id" Type="Int32" />
+          <Property Name="o_dish_id" Type="Int32" />
+          <Property Name="o_dish_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="o_location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="o_time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="fs_dish" Relationship="Self.FK__fs_order__o_dish__440B1D61" FromRole="fs_order" ToRole="fs_dish" />
+          <NavigationProperty Name="fs_restaurant" Relationship="Self.FK__fs_order__o_res___4316F928" FromRole="fs_order" ToRole="fs_restaurant" />
+        </EntityType>
+        <EntityType Name="fs_restaurant">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="r_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="fs_category" Relationship="Self.FK__fs_catego__c_res__3B75D760" FromRole="fs_restaurant" ToRole="fs_category" />
+          <NavigationProperty Name="fs_dish" Relationship="Self.FK__fs_dish__d_res_i__3E52440B" FromRole="fs_restaurant" ToRole="fs_dish" />
+          <NavigationProperty Name="fs_order" Relationship="Self.FK__fs_order__o_res___4316F928" FromRole="fs_restaurant" ToRole="fs_order" />
+        </EntityType>
+        <EntityType Name="fs_user">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="u_firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="u_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="fs_dish" Relationship="Self.FK__fs_dish__d_user___3F466844" FromRole="fs_user" ToRole="fs_dish" />
+        </EntityType>
+        <Association Name="FK__fs_catego__c_res__3B75D760">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_category" Type="Self.fs_category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_category">
+              <PropertyRef Name="c_res_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_dish__d_res_i__3E52440B">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_dish" Type="Self.fs_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_dish">
+              <PropertyRef Name="d_res_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_dish__d_user___3F466844">
+          <End Role="fs_user" Type="Self.fs_user" Multiplicity="0..1" />
+          <End Role="fs_dish" Type="Self.fs_dish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_user">
+              <PropertyRef Name="u_id" />
+            </Principal>
+            <Dependent Role="fs_dish">
+              <PropertyRef Name="d_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_order__o_dish__440B1D61">
+          <End Role="fs_dish" Type="Self.fs_dish" Multiplicity="0..1" />
+          <End Role="fs_order" Type="Self.fs_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_dish">
+              <PropertyRef Name="d_id" />
+            </Principal>
+            <Dependent Role="fs_order">
+              <PropertyRef Name="o_dish_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_order__o_res___4316F928">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_order" Type="Self.fs_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_order">
+              <PropertyRef Name="o_res_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodServicesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fs_admin" EntityType="Self.fs_admin" />
+          <EntitySet Name="fs_category" EntityType="Self.fs_category" />
+          <EntitySet Name="fs_dish" EntityType="Self.fs_dish" />
+          <EntitySet Name="fs_order" EntityType="Self.fs_order" />
+          <EntitySet Name="fs_restaurant" EntityType="Self.fs_restaurant" />
+          <EntitySet Name="fs_user" EntityType="Self.fs_user" />
+          <AssociationSet Name="FK__fs_catego__c_res__3B75D760" Association="Self.FK__fs_catego__c_res__3B75D760">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_category" EntitySet="fs_category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_dish__d_res_i__3E52440B" Association="Self.FK__fs_dish__d_res_i__3E52440B">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_dish" EntitySet="fs_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_dish__d_user___3F466844" Association="Self.FK__fs_dish__d_user___3F466844">
+            <End Role="fs_user" EntitySet="fs_user" />
+            <End Role="fs_dish" EntitySet="fs_dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_order__o_dish__440B1D61" Association="Self.FK__fs_order__o_dish__440B1D61">
+            <End Role="fs_dish" EntitySet="fs_dish" />
+            <End Role="fs_order" EntitySet="fs_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_order__o_res___4316F928" Association="Self.FK__fs_order__o_res___4316F928">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_order" EntitySet="fs_order" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FoodServicesModelStoreContainer" CdmEntityContainer="FoodServicesEntities">
+          <EntitySetMapping Name="fs_admin">
+            <EntityTypeMapping TypeName="FoodServicesModel.fs_admin">
+              <MappingFragment StoreEntitySet="fs_admin">
+                <ScalarProperty Name="a_id" ColumnName="a_id" />
+                <ScalarProperty Name="a_username" ColumnName="a_username" />
+                <ScalarProperty Name="a_password" ColumnName="a_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fs_category">
+            <EntityTypeMapping TypeName="FoodServicesModel.fs_category">
+              <MappingFragment StoreEntitySet="fs_category">
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="c_name" ColumnName="c_name" />
+                <ScalarProperty Name="c_image" ColumnName="c_image" />
+                <ScalarProperty Name="c_res_id" ColumnName="c_res_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fs_dish">
+            <EntityTypeMapping TypeName="FoodServicesModel.fs_dish">
+              <MappingFragment StoreEntitySet="fs_dish">
+                <ScalarProperty Name="d_id" ColumnName="d_id" />
+                <ScalarProperty Name="d_image" ColumnName="d_image" />
+                <ScalarProperty Name="d_res_id" ColumnName="d_res_id" />
+                <ScalarProperty Name="d_user_id" ColumnName="d_user_id" />
+                <ScalarProperty Name="d_name" ColumnName="d_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fs_order">
+            <EntityTypeMapping TypeName="FoodServicesModel.fs_order">
+              <MappingFragment StoreEntitySet="fs_order">
+                <ScalarProperty Name="o_id" ColumnName="o_id" />
+                <ScalarProperty Name="o_res_id" ColumnName="o_res_id" />
+                <ScalarProperty Name="o_dish_id" ColumnName="o_dish_id" />
+                <ScalarProperty Name="o_dish_name" ColumnName="o_dish_name" />
+                <ScalarProperty Name="o_location" ColumnName="o_location" />
+                <ScalarProperty Name="o_time" ColumnName="o_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fs_restaurant">
+            <EntityTypeMapping TypeName="FoodServicesModel.fs_restaurant">
+              <MappingFragment StoreEntitySet="fs_restaurant">
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
+                <ScalarProperty Name="r_name" ColumnName="r_name" />
+                <ScalarProperty Name="r_image" ColumnName="r_image" />
+                <ScalarProperty Name="r_contact" ColumnName="r_contact" />
+                <ScalarProperty Name="r_email" ColumnName="r_email" />
+                <ScalarProperty Name="r_password" ColumnName="r_password" />
+                <ScalarProperty Name="r_location" ColumnName="r_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fs_user">
+            <EntityTypeMapping TypeName="FoodServicesModel.fs_user">
+              <MappingFragment StoreEntitySet="fs_user">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="u_firstname" ColumnName="u_firstname" />
+                <ScalarProperty Name="u_lastname" ColumnName="u_lastname" />
+                <ScalarProperty Name="u_gender" ColumnName="u_gender" />
+                <ScalarProperty Name="u_contact" ColumnName="u_contact" />
+                <ScalarProperty Name="u_email" ColumnName="u_email" />
+                <ScalarProperty Name="u_password" ColumnName="u_password" />
+                <ScalarProperty Name="u_username" ColumnName="u_username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
