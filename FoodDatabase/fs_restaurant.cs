@@ -29,7 +29,10 @@ namespace FoodDatabase
         public string r_email { get; set; }
         public string r_password { get; set; }
         public string r_location { get; set; }
+        public Nullable<int> r_ad_id { get; set; }
+        public Nullable<int> r_status { get; set; }
     
+        public virtual fs_admin fs_admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fs_category> fs_category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

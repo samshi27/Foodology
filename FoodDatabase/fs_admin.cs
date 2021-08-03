@@ -14,8 +14,17 @@ namespace FoodDatabase
     
     public partial class fs_admin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public fs_admin()
+        {
+            this.fs_restaurant = new HashSet<fs_restaurant>();
+        }
+    
         public int a_id { get; set; }
         public string a_username { get; set; }
         public string a_password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fs_restaurant> fs_restaurant { get; set; }
     }
 }

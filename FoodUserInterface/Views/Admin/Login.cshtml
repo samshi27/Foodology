@@ -1,0 +1,46 @@
+﻿@model FoodDatabase.fs_admin
+@{
+    ViewBag.Title = "Admin Login";
+}
+
+<h2>Admin Login</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<style>
+    span
+    {
+        color: red !important;
+    }
+</style>
+
+<div>
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>@Html.LabelFor(model => model.a_username)</td>
+                    <td>@Html.TextBoxFor(model => model.a_username)</td>
+                    <td>
+                        <span>@Html.ValidationMessageFor(model => model.a_username)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.a_password)</td>
+                    <td>@Html.PasswordFor(model => model.a_password)</td>
+                    <td>
+                        <span>@Html.ValidationMessageFor(model => model.a_password)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" class="btn btn-primary" value="Login" name="name" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="color: red;">@ViewBag.error</p>
+    }
+</div>

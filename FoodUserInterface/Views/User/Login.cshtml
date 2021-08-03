@@ -1,0 +1,58 @@
+﻿@model FoodDatabase.fs_user
+@{
+    ViewBag.Title = "User Login";
+}
+
+<h2>Sign in</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#newUserBtn').click(function () {
+            document.location.href = "Signup";
+        });
+    });
+</script>
+
+<style>
+    span{
+        color: red;
+    }
+</style>
+
+<div>
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>@Html.LabelFor(model => model.u_username)</td>
+                    <td>@Html.TextBoxFor(model => model.u_username)</td>
+                    <td>
+                        <span>@Html.ValidationMessageFor(model => model.u_username)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.u_password)</td>
+                    <td>@Html.PasswordFor(model => model.u_password)</td>
+                    <td>
+                        <span>@Html.ValidationMessageFor(model => model.u_password)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Login" name="name" />
+                    </td>
+                    <td>
+                        <input type="button" id="newUserBtn" class="btn btn-primary" value="Sign Up" name="name" />
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="color: red;">@ViewBag.error</p>
+    }
+</div>
+

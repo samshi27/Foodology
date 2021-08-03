@@ -18,6 +18,7 @@ namespace FoodDatabase
         public string c_name { get; set; }
         public string c_image { get; set; }
         public Nullable<int> c_res_id { get; set; }
+        public int c_status { get; set; }
     
         public virtual fs_restaurant fs_restaurant { get; set; }
     }

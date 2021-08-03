@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FoodDatabase.fs_user>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.u_username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.u_firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.u_lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.u_contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.u_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.u_password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.u_username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.u_firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.u_lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.u_contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.u_email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.u_password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.u_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.u_id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -21,6 +21,7 @@
           <Property Name="c_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="c_image" Type="nvarchar(max)" Nullable="false" />
           <Property Name="c_res_id" Type="int" />
+          <Property Name="c_status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="fs_dish">
           <Key>
@@ -54,6 +55,8 @@
           <Property Name="r_email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="r_password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="r_location" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="r_ad_id" Type="int" />
+          <Property Name="r_status" Type="int" />
         </EntityType>
         <EntityType Name="fs_user">
           <Key>
@@ -128,6 +131,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__fs_restau__r_ad___44FF419A">
+          <End Role="fs_admin" Type="Self.fs_admin" Multiplicity="0..1" />
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_admin">
+              <PropertyRef Name="a_id" />
+            </Principal>
+            <Dependent Role="fs_restaurant">
+              <PropertyRef Name="r_ad_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FoodServicesModelStoreContainer">
           <EntitySet Name="fs_admin" EntityType="Self.fs_admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fs_category" EntityType="Self.fs_category" Schema="dbo" store:Type="Tables" />
@@ -155,6 +170,10 @@
             <End Role="fs_restaurant" EntitySet="fs_restaurant" />
             <End Role="fs_order" EntitySet="fs_order" />
           </AssociationSet>
+          <AssociationSet Name="FK__fs_restau__r_ad___44FF419A" Association="Self.FK__fs_restau__r_ad___44FF419A">
+            <End Role="fs_admin" EntitySet="fs_admin" />
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -168,6 +187,7 @@
           <Property Name="a_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="a_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="a_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="fs_restaurant" Relationship="Self.FK__fs_restau__r_ad___44FF419A" FromRole="fs_admin" ToRole="fs_restaurant" />
         </EntityType>
         <EntityType Name="fs_category">
           <Key>
@@ -177,6 +197,7 @@
           <Property Name="c_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="c_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="c_res_id" Type="Int32" />
+          <Property Name="c_status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="fs_restaurant" Relationship="Self.FK__fs_catego__c_res__3B75D760" FromRole="fs_category" ToRole="fs_restaurant" />
         </EntityType>
         <EntityType Name="fs_dish">
@@ -216,6 +237,9 @@
           <Property Name="r_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="r_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="r_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="r_ad_id" Type="Int32" />
+          <Property Name="r_status" Type="Int32" />
+          <NavigationProperty Name="fs_admin" Relationship="Self.FK__fs_restau__r_ad___44FF419A" FromRole="fs_restaurant" ToRole="fs_admin" />
           <NavigationProperty Name="fs_category" Relationship="Self.FK__fs_catego__c_res__3B75D760" FromRole="fs_restaurant" ToRole="fs_category" />
           <NavigationProperty Name="fs_dish" Relationship="Self.FK__fs_dish__d_res_i__3E52440B" FromRole="fs_restaurant" ToRole="fs_dish" />
           <NavigationProperty Name="fs_order" Relationship="Self.FK__fs_order__o_res___4316F928" FromRole="fs_restaurant" ToRole="fs_order" />
@@ -234,6 +258,18 @@
           <Property Name="u_username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="fs_dish" Relationship="Self.FK__fs_dish__d_user___3F466844" FromRole="fs_user" ToRole="fs_dish" />
         </EntityType>
+        <Association Name="FK__fs_restau__r_ad___44FF419A">
+          <End Role="fs_admin" Type="Self.fs_admin" Multiplicity="0..1" />
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_admin">
+              <PropertyRef Name="a_id" />
+            </Principal>
+            <Dependent Role="fs_restaurant">
+              <PropertyRef Name="r_ad_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__fs_catego__c_res__3B75D760">
           <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
           <End Role="fs_category" Type="Self.fs_category" Multiplicity="*" />
@@ -301,6 +337,10 @@
           <EntitySet Name="fs_order" EntityType="Self.fs_order" />
           <EntitySet Name="fs_restaurant" EntityType="Self.fs_restaurant" />
           <EntitySet Name="fs_user" EntityType="Self.fs_user" />
+          <AssociationSet Name="FK__fs_restau__r_ad___44FF419A" Association="Self.FK__fs_restau__r_ad___44FF419A">
+            <End Role="fs_admin" EntitySet="fs_admin" />
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+          </AssociationSet>
           <AssociationSet Name="FK__fs_catego__c_res__3B75D760" Association="Self.FK__fs_catego__c_res__3B75D760">
             <End Role="fs_restaurant" EntitySet="fs_restaurant" />
             <End Role="fs_category" EntitySet="fs_category" />
@@ -344,6 +384,7 @@
                 <ScalarProperty Name="c_name" ColumnName="c_name" />
                 <ScalarProperty Name="c_image" ColumnName="c_image" />
                 <ScalarProperty Name="c_res_id" ColumnName="c_res_id" />
+                <ScalarProperty Name="c_status" ColumnName="c_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -380,6 +421,8 @@
                 <ScalarProperty Name="r_email" ColumnName="r_email" />
                 <ScalarProperty Name="r_password" ColumnName="r_password" />
                 <ScalarProperty Name="r_location" ColumnName="r_location" />
+                <ScalarProperty Name="r_ad_id" ColumnName="r_ad_id" />
+                <ScalarProperty Name="r_status" ColumnName="r_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

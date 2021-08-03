@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2355d4575e874e5a92e5176bc19cbdee" Name="Diagram1">
-        <EntityTypeShape EntityType="FoodServicesModel.fs_admin" Width="1.5" PointX="2.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="FoodServicesModel.fs_category" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="FoodServicesModel.fs_dish" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FoodServicesModel.fs_order" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FoodServicesModel.fs_restaurant" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FoodServicesModel.fs_user" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+      <Diagram DiagramId="0ef359e14f8c4a758ddd21f19d82fae5" Name="Diagram1">
+        <EntityTypeShape EntityType="FoodServicesModel.fs_admin" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodServicesModel.fs_category" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodServicesModel.fs_dish" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodServicesModel.fs_order" Width="1.5" PointX="10.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodServicesModel.fs_restaurant" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodServicesModel.fs_user" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="FoodServicesModel.FK__fs_restau__r_ad___44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="FoodServicesModel.FK__fs_catego__c_res__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="FoodServicesModel.FK__fs_dish__d_res_i__3E52440B" ManuallyRouted="false" />
         <AssociationConnector Association="FoodServicesModel.FK__fs_dish__d_user___3F466844" ManuallyRouted="false" />
