@@ -44,6 +44,12 @@ namespace FoodUserInterface.Controllers
             }
         }
 
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return RedirectToAction("Home");
+        }
+
         [HttpGet]
         public ActionResult Signup()
         {
