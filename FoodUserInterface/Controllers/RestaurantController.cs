@@ -54,6 +54,8 @@ namespace FoodUserInterface.Controllers
             }
         }
 
+        // ---------------- ADD CATEGORY ---------------------
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -84,7 +86,7 @@ namespace FoodUserInterface.Controllers
                 entities.fs_category.Add(category);
                 entities.SaveChanges();
                 ViewBag.SuccessMessage = "Image uploaded successfully";
-                return RedirectToAction("ViewCategory");
+                return RedirectToAction("CreateItem");
             }
             return View();
         }
@@ -99,6 +101,59 @@ namespace FoodUserInterface.Controllers
             return View(stu);
         }
 
+        // ---------------- END ADD CATEGORY ---------------------
+
+
+        // ---------------- ADD ITEM ---------------------
+
+        [HttpGet]
+        public ActionResult CreateItem()
+        {
+            if (Session["r_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateItem(fs_item cvm, HttpPostedFileBase imgFile)
+        {
+            string path = uploadingImgFile(imgFile);
+            if (path.Equals("-1"))
+            {
+                ViewBag.error = "Image could not be uploaded";
+            }
+            else
+            {
+                fs_item item = new fs_item
+                {
+                    i_name = cvm.i_name,
+                    i_price = cvm.i_price,
+                    i_desc = cvm.i_desc,
+                    i_image = path,
+                    i_status = 1,
+                    i_c_id = Convert.ToInt32(Session["c_id"].ToString()),
+                    i_r_id = Convert.ToInt32(Session["r_id"].ToString())
+                };
+                entities.fs_item.Add(item);
+                entities.SaveChanges();
+                ViewBag.SuccessMessage = "Image uploaded successfully";
+                return RedirectToAction("ViewItem");
+            }
+            return View();
+        }
+
+        public ActionResult ViewItem(int? page)
+        {
+            int pagesize = 6, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = entities.fs_item.Where(model => model.i_status == 1).OrderByDescending(model => model.i_id).ToList();
+            IPagedList<fs_item> stu = list.ToPagedList(pageindex, pagesize);
+
+            return View(stu);
+        }
+        // ----------------- END ADD ITEM -------------------
         public string uploadingImgFile(HttpPostedFileBase file)
         {
             Random r = new Random();

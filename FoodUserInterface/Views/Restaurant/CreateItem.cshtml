@@ -1,8 +1,7 @@
-﻿@model FoodDatabase.fs_category
+﻿@model FoodDatabase.fs_item
 @{
-    ViewBag.Title = "Add Category";
+    ViewBag.Title = "Add Item";
 }
-
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -50,27 +49,43 @@
 </style>
 
 <div>
-    @using (Html.BeginForm("Create", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateItem", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div id="container">
-            <h2>Add Category</h2>
+        <div>
+            <h2>Add Item</h2>
             <table>
                 <tbody>
                     <tr>
-                        <td>@Html.LabelFor(model => model.c_name)</td>
-                        <td>@Html.EditorFor(model => model.c_name)</td>
+                        <td>@Html.LabelFor(model => model.i_name)</td>
+                        <td>@Html.EditorFor(model => model.i_name)</td>
                         <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.c_name)</span>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_name)</span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td>@Html.LabelFor(model => model.c_image)</td>
+                        <td>@Html.LabelFor(model => model.i_price)</td>
+                        <td>@Html.EditorFor(model => model.i_price)</td>
+                        <td>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_price)</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.LabelFor(model => model.i_desc)</td>
+                        <td>@Html.EditorFor(model => model.i_desc)</td>
+                        <td>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_desc)</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>@Html.LabelFor(model => model.i_image)</td>
                         <td>
                             <input type="file" value="" name="imgFile" id="imgFile" />
                         </td>
                         <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.c_image)</span>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_image)</span>
                         </td>
                     </tr>
 

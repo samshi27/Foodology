@@ -12,6 +12,7 @@ namespace FoodDatabase
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class fs_admin
     {
@@ -23,10 +24,10 @@ namespace FoodDatabase
     
         public int a_id { get; set; }
 
-        [DisplayName("User Name")]
+        [Required (ErrorMessage = "Required Field"), DisplayName ("User Name")]
         public string a_username { get; set; }
 
-        [DisplayName("Password")]
+        [Required(ErrorMessage = "Required Field"), DisplayName("Password")]
         public string a_password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

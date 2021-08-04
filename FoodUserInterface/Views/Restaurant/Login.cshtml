@@ -16,37 +16,75 @@
 </script>
 
 <style>
-    span{
+    .table span {
         color: red !important;
     }
+
+    #container {
+        margin-top: 100px;
+    }
+
+    .row img {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    table span {
+        color: red;
+    }
+
+    table td {
+        padding: 10px 0;
+        padding-right: 60px;
+    }
+
+    input {
+        border: 1px solid #cbc9c8;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+        input[type = "submit"], #newUserBtn {
+            background-color: #FFD371;
+            border: none;
+            color: black;
+        }
+
+            input[type = "submit"]:hover, #newUserBtn:hover {
+                background-color: #FFB740;
+                color: black;
+            }
 </style>
 
 <div>
     @using (Html.BeginForm(FormMethod.Post))
     {
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>@Html.LabelFor(model => model.r_name)</td>
-                    <td>@Html.TextBoxFor(model => model.r_name)</td>
-                    <td>
-                        <span>@Html.ValidationMessageFor(model => model.r_name)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(model => model.r_password)</td>
-                    <td>@Html.PasswordFor(model => model.r_password)</td>
-                    <td>
-                        <span>@Html.ValidationMessageFor(model => model.r_password)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" class="btn btn-primary" value="Login" name="name" />
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="container">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.r_name)</td>
+                        <td>@Html.TextBoxFor(model => model.r_name)</td>
+                        <td>
+                            <span>@Html.ValidationMessageFor(model => model.r_name)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.r_password)</td>
+                        <td>@Html.PasswordFor(model => model.r_password)</td>
+                        <td>
+                            <span>@Html.ValidationMessageFor(model => model.r_password)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn btn-primary" value="Login" name="name" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
         <p style="color: red;">@ViewBag.error</p>
     }
 </div>

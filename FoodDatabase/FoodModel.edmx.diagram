@@ -11,6 +11,9 @@
         <EntityTypeShape EntityType="FoodDatabaseModel.fs_user" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="FoodDatabaseModel.FK__fs_restau__r_a_i__2C3393D0" ManuallyRouted="false" />
         <AssociationConnector Association="FoodDatabaseModel.FK__fs_catego__c_r_i__2F10007B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FoodDatabaseModel.fs_item" Width="1.5" PointX="7.5" PointY="1.25" />
+        <AssociationConnector Association="FoodDatabaseModel.FK__fs_item__i_c_id__31EC6D26" />
+        <AssociationConnector Association="FoodDatabaseModel.FK__fs_item__i_r_id__32E0915F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

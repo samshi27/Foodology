@@ -23,6 +23,19 @@
           <Property Name="c_r_id" Type="int" />
           <Property Name="c_status" Type="int" />
         </EntityType>
+        <EntityType Name="fs_item">
+          <Key>
+            <PropertyRef Name="i_id" />
+          </Key>
+          <Property Name="i_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="i_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="i_price" Type="nvarchar" MaxLength="50" />
+          <Property Name="i_desc" Type="nvarchar(max)" />
+          <Property Name="i_c_id" Type="int" />
+          <Property Name="i_image" Type="nvarchar(max)" />
+          <Property Name="i_r_id" Type="int" />
+          <Property Name="i_status" Type="int" />
+        </EntityType>
         <EntityType Name="fs_restaurant">
           <Key>
             <PropertyRef Name="r_id" />
@@ -62,6 +75,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__fs_item__i_c_id__31EC6D26">
+          <End Role="fs_category" Type="Self.fs_category" Multiplicity="0..1" />
+          <End Role="fs_item" Type="Self.fs_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_category">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="fs_item">
+              <PropertyRef Name="i_c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_item__i_r_id__32E0915F">
+          <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="0..1" />
+          <End Role="fs_item" Type="Self.fs_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_item">
+              <PropertyRef Name="i_r_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__fs_restau__r_a_i__2C3393D0">
           <End Role="fs_admin" Type="Self.fs_admin" Multiplicity="0..1" />
           <End Role="fs_restaurant" Type="Self.fs_restaurant" Multiplicity="*" />
@@ -77,11 +114,20 @@
         <EntityContainer Name="FoodDatabaseModelStoreContainer">
           <EntitySet Name="fs_admin" EntityType="Self.fs_admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fs_category" EntityType="Self.fs_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fs_item" EntityType="Self.fs_item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fs_restaurant" EntityType="Self.fs_restaurant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fs_user" EntityType="Self.fs_user" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__fs_catego__c_r_i__2F10007B" Association="Self.FK__fs_catego__c_r_i__2F10007B">
             <End Role="fs_restaurant" EntitySet="fs_restaurant" />
             <End Role="fs_category" EntitySet="fs_category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_item__i_c_id__31EC6D26" Association="Self.FK__fs_item__i_c_id__31EC6D26">
+            <End Role="fs_category" EntitySet="fs_category" />
+            <End Role="fs_item" EntitySet="fs_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_item__i_r_id__32E0915F" Association="Self.FK__fs_item__i_r_id__32E0915F">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_item" EntitySet="fs_item" />
           </AssociationSet>
           <AssociationSet Name="FK__fs_restau__r_a_i__2C3393D0" Association="Self.FK__fs_restau__r_a_i__2C3393D0">
             <End Role="fs_admin" EntitySet="fs_admin" />
@@ -111,6 +157,7 @@
           <Property Name="c_r_id" Type="Int32" />
           <NavigationProperty Name="fs_restaurant" Relationship="Self.FK__fs_catego__c_r_i__2F10007B" FromRole="fs_category" ToRole="fs_restaurant" />
           <Property Name="c_status" Type="Int32" />
+          <NavigationProperty Name="fs_item" Relationship="FoodDatabaseModel.FK__fs_item__i_c_id__31EC6D26" FromRole="fs_category" ToRole="fs_item" />
         </EntityType>
         <EntityType Name="fs_restaurant">
           <Key>
@@ -127,6 +174,7 @@
           <NavigationProperty Name="fs_category" Relationship="Self.FK__fs_catego__c_r_i__2F10007B" FromRole="fs_restaurant" ToRole="fs_category" />
           <Property Name="r_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="r_status" Type="Int32" />
+          <NavigationProperty Name="fs_item" Relationship="FoodDatabaseModel.FK__fs_item__i_r_id__32E0915F" FromRole="fs_restaurant" ToRole="fs_item" />
         </EntityType>
         <EntityType Name="fs_user">
           <Key>
@@ -178,7 +226,55 @@
             <End Role="fs_restaurant" EntitySet="fs_restaurant" />
             <End Role="fs_category" EntitySet="fs_category" />
           </AssociationSet>
+          <EntitySet Name="fs_item" EntityType="FoodDatabaseModel.fs_item" />
+          <AssociationSet Name="FK__fs_item__i_c_id__31EC6D26" Association="FoodDatabaseModel.FK__fs_item__i_c_id__31EC6D26">
+            <End Role="fs_category" EntitySet="fs_category" />
+            <End Role="fs_item" EntitySet="fs_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fs_item__i_r_id__32E0915F" Association="FoodDatabaseModel.FK__fs_item__i_r_id__32E0915F">
+            <End Role="fs_restaurant" EntitySet="fs_restaurant" />
+            <End Role="fs_item" EntitySet="fs_item" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="fs_item">
+          <Key>
+            <PropertyRef Name="i_id" />
+          </Key>
+          <Property Name="i_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="i_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="i_price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="i_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="i_c_id" Type="Int32" />
+          <Property Name="i_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="fs_category" Relationship="FoodDatabaseModel.FK__fs_item__i_c_id__31EC6D26" FromRole="fs_item" ToRole="fs_category" />
+          <Property Name="i_r_id" Type="Int32" />
+          <NavigationProperty Name="fs_restaurant" Relationship="FoodDatabaseModel.FK__fs_item__i_r_id__32E0915F" FromRole="fs_item" ToRole="fs_restaurant" />
+          <Property Name="i_status" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__fs_item__i_c_id__31EC6D26">
+          <End Type="FoodDatabaseModel.fs_category" Role="fs_category" Multiplicity="0..1" />
+          <End Type="FoodDatabaseModel.fs_item" Role="fs_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_category">
+              <PropertyRef Name="c_id" />
+            </Principal>
+            <Dependent Role="fs_item">
+              <PropertyRef Name="i_c_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fs_item__i_r_id__32E0915F">
+          <End Type="FoodDatabaseModel.fs_restaurant" Role="fs_restaurant" Multiplicity="0..1" />
+          <End Type="FoodDatabaseModel.fs_item" Role="fs_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fs_restaurant">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="fs_item">
+              <PropertyRef Name="i_r_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -231,6 +327,20 @@
                 <ScalarProperty Name="u_email" ColumnName="u_email" />
                 <ScalarProperty Name="u_username" ColumnName="u_username" />
                 <ScalarProperty Name="u_password" ColumnName="u_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fs_item">
+            <EntityTypeMapping TypeName="FoodDatabaseModel.fs_item">
+              <MappingFragment StoreEntitySet="fs_item">
+                <ScalarProperty Name="i_status" ColumnName="i_status" />
+                <ScalarProperty Name="i_r_id" ColumnName="i_r_id" />
+                <ScalarProperty Name="i_image" ColumnName="i_image" />
+                <ScalarProperty Name="i_c_id" ColumnName="i_c_id" />
+                <ScalarProperty Name="i_desc" ColumnName="i_desc" />
+                <ScalarProperty Name="i_price" ColumnName="i_price" />
+                <ScalarProperty Name="i_name" ColumnName="i_name" />
+                <ScalarProperty Name="i_id" ColumnName="i_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

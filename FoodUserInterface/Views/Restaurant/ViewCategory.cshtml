@@ -4,12 +4,23 @@
     ViewBag.Title = "View Categories";
 }
 
-<h2>View Categories</h2>
 <link href="~/Content/paginition.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
+<style>
+    a {
+        color: black;
+    }
+
+        a:hover {
+            text-decoration: none;
+            color: #FFB740;
+        }
+</style>
+
 <div class="row" style="margin-bottom:40px">
+    <h2>View Categories</h2>
     @if (Model != null)
     {
         foreach (var item in Model)

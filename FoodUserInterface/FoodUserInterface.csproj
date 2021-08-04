@@ -197,6 +197,8 @@
     <Content Include="Views\Restaurant\Create.cshtml" />
     <Content Include="Views\Restaurant\ViewCategory.cshtml" />
     <Content Include="Views\Admin\ViewRestaurant.cshtml" />
+    <Content Include="Views\Restaurant\CreateItem.cshtml" />
+    <Content Include="Views\Restaurant\ViewItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

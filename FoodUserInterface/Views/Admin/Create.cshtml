@@ -3,7 +3,7 @@
     ViewBag.Title = "Add Restaurant";
 }
 
-<h2>Add Restaurant</h2>
+
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -14,10 +14,54 @@
         });
     });
 </script>
+
+<style>
+    .table span {
+        color: red !important;
+    }
+
+    #container {
+        margin-top: 100px;
+    }
+
+    .row img {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    table span {
+        color: red;
+    }
+
+    table td {
+        padding: 10px 0;
+        padding-right: 60px;
+    }
+
+    input {
+        border: 1px solid #cbc9c8;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+        input[type = "submit"], #newUserBtn {
+            background-color: #FFD371;
+            border: none;
+            color: black;
+        }
+
+            input[type = "submit"]:hover, #newUserBtn:hover {
+                background-color: #FFB740;
+                color: black;
+            }
+</style>
+
 <div>
     @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <table class="table">
+        <div id="container">
+            <h2>Add Restaurant</h2>
+            <table>
             <tbody>
                 <tr>
                     <td>@Html.LabelFor(model => model.r_name)</td>
@@ -76,6 +120,8 @@
                 </tr>
             </tbody>
         </table>
+        </div>
+       
         <p style="color: red;">@ViewBag.Error</p>
     }
 </div>

@@ -71,6 +71,9 @@
     <Compile Include="fs_category.cs">
       <DependentUpon>FoodModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="fs_item.cs">
+      <DependentUpon>FoodModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="fs_restaurant.cs">
       <DependentUpon>FoodModel.tt</DependentUpon>
     </Compile>

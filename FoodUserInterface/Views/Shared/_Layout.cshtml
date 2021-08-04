@@ -69,11 +69,7 @@
                 </div>
                 <div class="menu-items">
                     <span>@Html.ActionLink("Home", "Home", "User")</span>
-                    <span>@Html.ActionLink("User", "Login", "User")</span>
-                    @if (Session["u_username"] != null)
-                    {
-                        <span>@Session["u_username"].ToString()</span>
-                    }
+                    <span>@Html.ActionLink("Account", "Login", "User")</span>
                 </div>
             </div>
 

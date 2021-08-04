@@ -31,6 +31,10 @@
 <div class="image-background">
     <img src="~/Content/images/foodology_cover.png" />
     <div class="image-text">
+        @if (Session["u_username"] != null)
+        {
+            <p>Welcome, @Session["u_username"].ToString() .</p>
+        }
         <p>
             Find the Best restaurants, cafes, and bars.
         </p>
