@@ -11,7 +11,7 @@ namespace FoodUserInterface.Controllers
 {
     public class RestaurantController : Controller
     {
-        FoodServicesEntities entities = new FoodServicesEntities();
+        FoodDatabaseEntities entities = new FoodDatabaseEntities();
 
         [HttpGet]
         public ActionResult Login()
@@ -43,11 +43,11 @@ namespace FoodUserInterface.Controllers
         }
 
         [HttpPost]
-        public ActionResult Signup(fs_restaurant uobj)
+        public ActionResult Signup(fs_category uobj)
         {
-            using (FoodServicesEntities entity = new FoodServicesEntities())
+            using (FoodDatabaseEntities entity = new FoodDatabaseEntities())
             {
-                entity.fs_restaurant.Add(uobj);
+                entity.fs_category.Add(uobj);
                 entity.SaveChanges();
 
                 return RedirectToAction("Login");
@@ -74,14 +74,14 @@ namespace FoodUserInterface.Controllers
             }
             else
             {
-                fs_category cat = new fs_category
+                fs_category category = new fs_category
                 {
                     c_name = cvm.c_name,
                     c_image = path,
                     c_status = 1,
-                    c_res_id = Convert.ToInt32(Session["ad_id"].ToString())
+                    c_r_id = Convert.ToInt32(Session["r_id"].ToString())
                 };
-                entities.fs_category.Add(cat);
+                entities.fs_category.Add(category);
                 entities.SaveChanges();
                 ViewBag.SuccessMessage = "Image uploaded successfully";
                 return RedirectToAction("ViewCategory");
@@ -111,9 +111,9 @@ namespace FoodUserInterface.Controllers
                 {
                     try
                     {
-                        path = Path.Combine(Server.MapPath("~/Content/upload"), random + Path.GetFileName(file.FileName));
+                        path = Path.Combine(Server.MapPath("~/Content/upload_cat"), random + Path.GetFileName(file.FileName));
                         file.SaveAs(path);
-                        path = "~/Content/upload/" + random + Path.GetFileName(file.FileName);
+                        path = "~/Content/upload_cat/" + random + Path.GetFileName(file.FileName);
                     }
                     catch (Exception ex)
                     {

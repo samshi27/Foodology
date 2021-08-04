@@ -11,14 +11,19 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class fs_category
     {
         public int c_id { get; set; }
+        
+        [DisplayName("Category Name")]
         public string c_name { get; set; }
+
+        [DisplayName("Image")]
         public string c_image { get; set; }
-        public Nullable<int> c_res_id { get; set; }
-        public int c_status { get; set; }
+        public Nullable<int> c_r_id { get; set; }
+        public Nullable<int> c_status { get; set; }
     
         public virtual fs_restaurant fs_restaurant { get; set; }
     }

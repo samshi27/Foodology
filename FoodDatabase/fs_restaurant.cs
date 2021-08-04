@@ -11,33 +11,40 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class fs_restaurant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public fs_restaurant()
         {
             this.fs_category = new HashSet<fs_category>();
-            this.fs_dish = new HashSet<fs_dish>();
-            this.fs_order = new HashSet<fs_order>();
         }
     
         public int r_id { get; set; }
+
+        [DisplayName("Restaurant Name")]
         public string r_name { get; set; }
-        public string r_image { get; set; }
-        public string r_contact { get; set; }
-        public string r_email { get; set; }
-        public string r_password { get; set; }
+
+        [DisplayName("Location")]
         public string r_location { get; set; }
-        public Nullable<int> r_ad_id { get; set; }
+
+        [DisplayName("Email")]
+        public string r_email { get; set; }
+
+        [DisplayName("Contact")]
+        public string r_contact { get; set; }
+        public Nullable<int> r_a_id { get; set; }
+
+        [DisplayName("Image")]
+        public string r_image { get; set; }
+
+        [DisplayName("Password")]
+        public string r_password { get; set; }
         public Nullable<int> r_status { get; set; }
     
         public virtual fs_admin fs_admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fs_category> fs_category { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fs_dish> fs_dish { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fs_order> fs_order { get; set; }
     }
 }

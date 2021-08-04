@@ -1,0 +1,47 @@
+﻿@model FoodDatabase.fs_category
+@{
+    ViewBag.Title = "Add Category";
+}
+
+<h2>Add Category</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<div>
+    @using (Html.BeginForm("Create", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>@Html.LabelFor(model => model.c_name)</td>
+                    <td>@Html.EditorFor(model => model.c_name)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.c_name)</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.c_image)</td>
+                    <td>
+                        <input type="file" value="" name="imgFile" id="imgFile" />
+                    </td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.c_image)</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Submit" name="name" />
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+        <p style="color: red;">@ViewBag.Error</p>
+    }
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

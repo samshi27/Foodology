@@ -3,7 +3,6 @@
     ViewBag.Title = "User Login";
 }
 
-<h2>Sign in</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -16,42 +15,89 @@
 </script>
 
 <style>
-    span{
+
+    #container {
+        margin-top: 100px;
+    }
+
+    .row img
+    {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    table span {
         color: red;
     }
+
+    table td
+    {
+        padding: 10px 0;
+        padding-right: 60px;
+    }
+
+    input
+    {
+        border: 1px solid #cbc9c8;
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    input[type = "submit"], #newUserBtn {
+        background-color: #FFD371;
+        border: none;
+        color: black;
+    }
+
+        input[type = "submit"]:hover, #newUserBtn:hover {
+            background-color: #FFB740;
+            color: black;
+        }
 </style>
 
 <div>
     @using (Html.BeginForm(FormMethod.Post))
     {
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>@Html.LabelFor(model => model.u_username)</td>
-                    <td>@Html.TextBoxFor(model => model.u_username)</td>
-                    <td>
-                        <span>@Html.ValidationMessageFor(model => model.u_username)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(model => model.u_password)</td>
-                    <td>@Html.PasswordFor(model => model.u_password)</td>
-                    <td>
-                        <span>@Html.ValidationMessageFor(model => model.u_password)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="submit" class="btn btn-primary" value="Login" name="name" />
-                    </td>
-                    <td>
-                        <input type="button" id="newUserBtn" class="btn btn-primary" value="Sign Up" name="name" />
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="container-fluid" id="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="~/Content/images/japanese.jpg" />
+                </div>
+                <div class="col-md-6" id="col-md-6">
+                    <h2>Sign in</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.u_username)</td>
+                                <td>@Html.TextBoxFor(model => model.u_username)</td>
+                                <td>
+                                    <span>@Html.ValidationMessageFor(model => model.u_username)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.u_password)</td>
+                                <td>@Html.PasswordFor(model => model.u_password)</td>
+                                <td>
+                                    <span>@Html.ValidationMessageFor(model => model.u_password)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" class="btn btn-primary" value="Login" name="name" />
+                                </td>
+                                <td>
+                                    <input type="button" id="newUserBtn" class="btn btn-primary" value="New User? Sign Up!" name="name" />
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
         <p style="color: red;">@ViewBag.error</p>
     }
 </div>

@@ -6,12 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using FoodDatabase;
 using PagedList;
+using FoodServices.Controllers;
 
 namespace FoodUserInterface.Controllers
 {
     public class AdminController : Controller
     {
-        FoodServicesEntities entities = new FoodServicesEntities();
+        AdminServicesController adminServices = new AdminServicesController();
+        FoodDatabaseEntities entities = new FoodDatabaseEntities();
 
         [HttpGet]
         public ActionResult Login()
@@ -49,16 +51,7 @@ namespace FoodUserInterface.Controllers
         [HttpPost]
         public ActionResult Create(fs_restaurant cvm, HttpPostedFileBase imgFile)
         {
-            fs_restaurant res = entities.fs_restaurant.Where(model => model.r_name == cvm.r_name).SingleOrDefault();
-
-            if(res == null)
-            {
-                ViewBag.error = "Restaurant not registered.";
-                return View();
-            }
-
-            else
-            {
+           
                 string path = uploadingImgFile(imgFile);
                 if (path.Equals("-1"))
                 {
@@ -69,19 +62,22 @@ namespace FoodUserInterface.Controllers
                     fs_restaurant fres = new fs_restaurant
                     {
                         r_name = cvm.r_name,
+                        r_location = cvm.r_location,
+                        r_email = cvm.r_email,
+                        r_contact = cvm.r_contact,
+                        r_password = cvm.r_password,
                         r_image = path,
                         r_status = 1,
-                        r_ad_id = Convert.ToInt32(Session["a_id"].ToString())
+                        r_a_id = Convert.ToInt32(Session["a_id"].ToString())
                     };
                     entities.fs_restaurant.Add(fres);
                     entities.SaveChanges();
-                    return RedirectToAction("ViewCategory");
+                    return RedirectToAction("ViewRestaurant");
                 }
                 return View();
-            }
         }
 
-        public ActionResult ViewCategory(int? page)
+        public ActionResult ViewRestaurant(int? page)
         {
             int pagesize = 6, pageindex = 1;
             pageindex = page.HasValue ? Convert.ToInt32(page) : 1;

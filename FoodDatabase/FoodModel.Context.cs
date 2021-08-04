@@ -13,10 +13,10 @@ namespace FoodDatabase
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FoodServicesEntities : DbContext
+    public partial class FoodDatabaseEntities : DbContext
     {
-        public FoodServicesEntities()
-            : base("name=FoodServicesEntities")
+        public FoodDatabaseEntities()
+            : base("name=FoodDatabaseEntities")
         {
         }
     
@@ -27,8 +27,6 @@ namespace FoodDatabase
     
         public virtual DbSet<fs_admin> fs_admin { get; set; }
         public virtual DbSet<fs_category> fs_category { get; set; }
-        public virtual DbSet<fs_dish> fs_dish { get; set; }
-        public virtual DbSet<fs_order> fs_order { get; set; }
         public virtual DbSet<fs_restaurant> fs_restaurant { get; set; }
         public virtual DbSet<fs_user> fs_user { get; set; }
     }

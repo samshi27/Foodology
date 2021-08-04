@@ -13,7 +13,7 @@ namespace FoodServices.Controllers
 
         public List<fs_user> GetRegUsers()
         {
-            using (FoodServicesEntities entities = new FoodServicesEntities())
+            using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
             {
                 return entities.fs_user.ToList();
             }
@@ -21,7 +21,7 @@ namespace FoodServices.Controllers
 
         public fs_user GetRegUsers(int id)
         {
-            using (FoodServicesEntities entities = new FoodServicesEntities())
+            using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
             {
                 var user = entities.fs_user.Find(id);
                 return user;
@@ -30,7 +30,7 @@ namespace FoodServices.Controllers
 
         public void Post(fs_user temp)
         {
-            using (FoodServicesEntities entities = new FoodServicesEntities())
+            using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
             {
                 entities.fs_user.Add(temp);
                 entities.SaveChanges();
@@ -40,7 +40,7 @@ namespace FoodServices.Controllers
         [HttpPut]
         public void Put(int id, fs_user temp)
         {
-            using (FoodServicesEntities entities = new FoodServicesEntities())
+            using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
             {
                 entities.Entry(temp).State = System.Data.Entity.EntityState.Modified;
                 entities.SaveChanges();
@@ -50,7 +50,7 @@ namespace FoodServices.Controllers
         [HttpDelete]
         public void Delete(int id)
         {
-            using (FoodServicesEntities entities = new FoodServicesEntities())
+            using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
             {
                 var user = entities.fs_user.Find(id);
                 entities.fs_user.Remove(user);

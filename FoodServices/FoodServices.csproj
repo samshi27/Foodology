@@ -162,6 +162,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdminServicesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserServicesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -224,6 +225,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AdminServices\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -256,7 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodDatabase\FoodDatabase.csproj">
-      <Project>{07f50947-41be-400b-b71d-3903b86db8a0}</Project>
+      <Project>{de716d51-a264-47c5-9ded-20c794d6525a}</Project>
       <Name>FoodDatabase</Name>
     </ProjectReference>
   </ItemGroup>

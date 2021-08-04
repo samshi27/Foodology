@@ -11,25 +11,31 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class fs_user
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public fs_user()
-        {
-            this.fs_dish = new HashSet<fs_dish>();
-        }
-    
         public int u_id { get; set; }
+
+        [DisplayName ("First Name")]
         public string u_firstname { get; set; }
+        
+        [DisplayName("Last Name")]
         public string u_lastname { get; set; }
+
+        [DisplayName("Gender")]
         public string u_gender { get; set; }
+
+        [DisplayName("Contact")]
         public string u_contact { get; set; }
+
+        [DisplayName("Email ID")]
         public string u_email { get; set; }
-        public string u_password { get; set; }
+
+        [DisplayName("User Name")]
         public string u_username { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fs_dish> fs_dish { get; set; }
+
+        [DisplayName("Password")]
+        public string u_password { get; set; }
     }
 }

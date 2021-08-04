@@ -55,6 +55,9 @@
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -148,6 +151,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\chinese.jpg" />
+    <Content Include="Content\images\foodology_cover.png" />
+    <Content Include="Content\images\japanese.jpg" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\pagination.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -176,8 +184,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Admin\About.cshtml" />
-    <Content Include="Views\Admin\Contact.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Signup.cshtml" />
     <Content Include="Views\User\Home.cshtml" />
@@ -185,14 +191,17 @@
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Restaurant\Login.cshtml" />
-    <Content Include="Views\Restaurant\Signup.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Restaurant\Create.cshtml" />
+    <Content Include="Views\Restaurant\ViewCategory.cshtml" />
+    <Content Include="Views\Admin\ViewRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\upload\" />
+    <Folder Include="Content\upload_cat\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FoodDatabase\FoodDatabase.csproj">
-      <Project>{07f50947-41be-400b-b71d-3903b86db8a0}</Project>
+      <Project>{de716d51-a264-47c5-9ded-20c794d6525a}</Project>
       <Name>FoodDatabase</Name>
     </ProjectReference>
     <ProjectReference Include="..\FoodServices\FoodServices.csproj">

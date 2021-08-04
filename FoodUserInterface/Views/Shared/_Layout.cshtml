@@ -3,116 +3,88 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <title>@ViewBag.Title</title>
+
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            font-family: 'Roboto Mono', monospace;
         }
 
-        div {
-            display: block;
+        .wrapper {
+            width: 100%;
+            height: auto;
         }
 
-        .side-navigator {
-            position: fixed;
-            bottom: 0;
-            width: 200px;
-            height: 100vh;
-            z-index: 9999;
-            background-size: cover;
-        }
-
-        .first-level {
-            overflow: hidden;
-            border-right: 1px solid #d9d9d9;
-            box-shadow: 0 0 16px -6px #000000;
-            width: 200px;
-            min-height: 100vh;
-            background-color: white;
-            position: fixed;
-            z-index: 102;
-            left: 0;
-        }
-
-        .side-body {
-            margin-left: 200px;
-        }
-
-        .body-content {
-            margin: 50px;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .first-level {
+        .top-navigator {
+            padding: 10px 40px;
+            height: auto;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: space-between;
         }
 
-        .one p {
-            font-size: 2.5em;
+        .body-content
+        {
+            padding: 0 40px;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: none;
+                color: #FFB740;
+            }
+
+        .logo
+        {
+            font-size: 1.7em;
             font-weight: 700;
         }
 
-        .section {
-            border-bottom: 1px solid #d9d9d9;
+        .menu-items
+        {
+            font-size: 1.2em;
         }
 
-        .side-navigator p {
-            text-align: center;
+        .menu-items span
+        {
+            padding: 0 0 0 20px;
         }
     </style>
 </head>
-<body>
-    <div class="side-navigator">
-        <div class="first-level">
-            <div>
 
+    <body>
+        <div class="wrapper">
+            <div class="top-navigator">
+                <div class="logo">
+                    <span>@Html.ActionLink("Foodology", "Home", "User")</span>
+                </div>
+                <div class="menu-items">
+                    <span>@Html.ActionLink("Home", "Home", "User")</span>
+                    <span>@Html.ActionLink("User", "Login", "User")</span>
+                    @if (Session["u_username"] != null)
+                    {
+                        <span>@Session["u_username"].ToString()</span>
+                    }
+                </div>
             </div>
-            <div class="section one">
-                <p>Foodo.</p>
-            </div>
-            <hr />
-            <div class="section two">
-                <p>@Html.ActionLink("Home", "Home", "User")</p>
-            </div>
-            <div class="section three">
-                <p>@Html.ActionLink("User", "Login", "User")<p>
-            </div>
-            <div class="section four">
-                <p>@Html.ActionLink("Admin", "Login", "Admin")</p>
-            </div>
-            <div class="section five">
-                <p>@Html.ActionLink("Restaurant", "Login", "Restaurant")</p>
-            </div>
-            <hr />
-            <div class="section five">
-                <p>&copy; @DateTime.Now.Year Foodo.</p>
+
+            <div class="body-content">
+                @RenderBody()
             </div>
         </div>
-    </div>
-    <div class="side-body">
-        <div class="body-content">
-            @RenderBody()
-        </div>
 
-    </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
-</body>
+    </body>
 </html>

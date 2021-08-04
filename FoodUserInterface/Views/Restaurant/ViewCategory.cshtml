@@ -1,0 +1,26 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<FoodDatabase.fs_category>
+@{
+    ViewBag.Title = "View Categories";
+}
+
+<h2>View Categories</h2>
+<link href="~/Content/paginition.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<div class="row" style="margin-bottom:40px">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-4 text-center" style="height : 200px; margin-top : 100px">
+                <img src="@Url.Content(item.c_image)" style="height : 100%; width : auto; border-radius : 10px" />
+                <h4>@item.c_name</h4>
+                <div>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.c_id }, new { @class = "btn btn-danger btn-sm" })
+                </div>
+            </div>
+        }
+    }
+</div>

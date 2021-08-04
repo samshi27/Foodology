@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{07F50947-41BE-400B-B71D-3903B86DB8A0}</ProjectGuid>
+    <ProjectGuid>{DE716D51-A264-47C5-9DED-20C794D6525A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FoodDatabase</RootNamespace>
@@ -71,12 +71,6 @@
     <Compile Include="fs_category.cs">
       <DependentUpon>FoodModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="fs_dish.cs">
-      <DependentUpon>FoodModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="fs_order.cs">
-      <DependentUpon>FoodModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="fs_restaurant.cs">
       <DependentUpon>FoodModel.tt</DependentUpon>
     </Compile>
@@ -86,30 +80,32 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="FoodModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FoodModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
     <None Include="FoodModel.edmx.diagram">
       <DependentUpon>FoodModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="FoodModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FoodModel.edmx</DependentUpon>
       <LastGenOutput>FoodModel.Context.cs</LastGenOutput>
+      <DependentUpon>FoodModel.edmx</DependentUpon>
     </Content>
     <Content Include="FoodModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FoodModel.edmx</DependentUpon>
       <LastGenOutput>FoodModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

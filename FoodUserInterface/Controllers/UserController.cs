@@ -4,13 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoodDatabase;
+using PagedList;
 using FoodServices.Controllers;
+using System.Web.Security;
 
 namespace FoodUserInterface.Controllers
 {
     public class UserController : Controller
     {
         UserServicesController userServices = new UserServicesController();
+        FoodDatabaseEntities entities = new FoodDatabaseEntities();
 
         [HttpGet]
         public ActionResult Login()
@@ -21,14 +24,16 @@ namespace FoodUserInterface.Controllers
         [HttpPost]
         public ActionResult Login(fs_user uobj)
         {
-            using (FoodServicesEntities entity = new FoodServicesEntities())
+            using (FoodDatabaseEntities entity = new FoodDatabaseEntities())
             {
                 var uobject = entity.fs_user.Where(x => x.u_username.Equals(uobj.u_username) && x.u_password.Equals(uobj.u_password)).FirstOrDefault();
-
+                
                 if (uobject != null)
                 {
                     Session["u_id"] = uobject.u_id.ToString();
-                    return RedirectToAction("Home");
+                    FormsAuthentication.SetAuthCookie(uobject.u_username, true);
+                    Session["u_username"] = uobject.u_username.ToString();
+                    return RedirectToAction("Home", "User");
                 }
 
                 else
@@ -48,7 +53,7 @@ namespace FoodUserInterface.Controllers
         [HttpPost]
         public ActionResult Signup(fs_user uobj)
         {
-            using (FoodServicesEntities entity = new FoodServicesEntities())
+            using (FoodDatabaseEntities entity = new FoodDatabaseEntities())
             {
                 entity.fs_user.Add(uobj);
                 entity.SaveChanges();
@@ -109,5 +114,15 @@ namespace FoodUserInterface.Controllers
             userServices.Delete(id);
             return RedirectToAction("Index");
         }
+        /*
+        public ActionResult ViewRestaurant(int? page)
+        {
+            int pagesize = 6, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = entities.fs_restaurant.Where(model => model.r_status == 1).OrderByDescending(model => model.r_id).ToList();
+            IPagedList<fs_restaurant> stu = list.ToPagedList(pageindex, pagesize);
+
+            return View(stu);
+        }*/
     }
 }

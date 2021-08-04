@@ -26,6 +26,31 @@
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.r_name)</span>
                     </td>
                 </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.r_location)</td>
+                    <td>@Html.EditorFor(model => model.r_location)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.r_location)</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.r_email)</td>
+                    <td>@Html.EditorFor(model => model.r_email)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.r_email)</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.r_contact)</td>
+                    <td>@Html.EditorFor(model => model.r_contact)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.r_contact)</span>
+                    </td>
+                </tr>
+
                 <tr>
                     <td>@Html.LabelFor(model => model.r_image)</td>
                     <td>
@@ -33,6 +58,14 @@
                     </td>
                     <td>
                         <span class="text-danger">@Html.ValidationMessageFor(model => model.r_image)</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.r_password)</td>
+                    <td>@Html.PasswordFor(model => model.r_password)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.r_password)</span>
                     </td>
                 </tr>
                 <tr>

@@ -1,7 +1,51 @@
-﻿
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<FoodDatabase.fs_restaurant>
 @{
     ViewBag.Title = "Home";
 }
+<style>
+    .image-background {
+        position: relative;
+        background-color: black;
+    }
 
-<h2>Home</h2>
+        .image-background img {
+            width: 100%;
+            opacity: 0.7;
+        }
 
+    .image-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+        .image-text p {
+            font-size: 3em;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+        }
+</style>
+<div class="image-background">
+    <img src="~/Content/images/foodology_cover.png" />
+    <div class="image-text">
+        <p>
+            Find the Best restaurants, cafes, and bars.
+        </p>
+    </div>
+</div>
+
+<div class="row" style="margin-bottom:40px">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-4 text-center" style="height : 200px; margin-top : 100px">
+                <img src="@Url.Content(item.r_image)" style="height : 100%; width : auto; border-radius : 10px" />
+                <h4>@item.r_name</h4>
+            </div>
+        }
+    }
+</div>
