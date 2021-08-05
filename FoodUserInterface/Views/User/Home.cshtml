@@ -3,6 +3,14 @@
 @{
     ViewBag.Title = "Home";
 }
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    var new_id = 5;
+    $('div.home-wrapper').attr('id', new_id);
+</script>
+
 <style>
     .image-background {
         position: relative;
@@ -27,7 +35,21 @@
             color: white;
             text-align: center;
         }
+
+    .resturant-list {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .home-wrapper-items {
+        text-align: left;
+    }
 </style>
+
 <div class="image-background">
     <img src="~/Content/images/foodology_cover.png" />
     <div class="image-text">
@@ -40,16 +62,23 @@
         </p>
     </div>
 </div>
-
-<div class="row" style="margin-bottom:40px">
+<div class="resturant-list">
     @if (Model != null)
     {
+        int i = 1;
         foreach (var item in Model)
-        {
-            <div class="col-lg-4 col-md-4 text-center" style="height : 200px; margin-top : 100px">
-                <img src="@Url.Content(item.r_image)" style="height : 100%; width : auto; border-radius : 10px" />
-                <h4>@item.r_name</h4>
+        {   
+            <div class="home-wrapper">
+                <div id =""class="home-wrapper-items" style="height : 200px; margin: 100px 0 0 0; width: 400px;">
+                    <img src="@Url.Content(item.r_image)" style="height : 100%; width : auto; border-radius : 10px" />
+                    <h3>@item.r_name</h3>
+                    <p style="color: gray;">@item.r_desc</p>
+                    <p>@item.r_location</p>
+                </div>
             </div>
+            i++;
         }
+
     }
+
 </div>

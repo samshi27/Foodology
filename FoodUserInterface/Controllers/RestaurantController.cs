@@ -107,13 +107,24 @@ namespace FoodUserInterface.Controllers
         // ---------------- ADD ITEM ---------------------
 
         [HttpGet]
-        public ActionResult CreateItem()
+        public ActionResult CreateItem(int id =0)
         {
             if (Session["r_id"] == null)
             {
                 return RedirectToAction("Login");
             }
-            return View();
+
+            fs_item itemModel = new fs_item();
+            //fs_category catModel = new fs_category();
+            using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
+            {
+                itemModel.CategoryCollection = entities.fs_category.ToList<fs_category>();
+                
+
+                //catModel.RestaurantCollection = entities.fs_restaurant.ToList<fs_restaurant>();
+            }
+             
+                return View(itemModel);
         }
 
         [HttpPost]
@@ -126,16 +137,16 @@ namespace FoodUserInterface.Controllers
             }
             else
             {
-                fs_item item = new fs_item
-                {
-                    i_name = cvm.i_name,
-                    i_price = cvm.i_price,
-                    i_desc = cvm.i_desc,
-                    i_image = path,
-                    i_status = 1,
-                    i_c_id = Convert.ToInt32(Session["c_id"].ToString()),
-                    i_r_id = Convert.ToInt32(Session["r_id"].ToString())
-                };
+                fs_item item = new fs_item();
+
+                    item.i_name = cvm.i_name;
+                    item.i_price = cvm.i_price;
+                    item.i_desc = cvm.i_desc;
+                    item.i_image = path;
+                    item.i_status = 1;
+                    item.i_c_id = cvm.i_c_id;
+                    item.i_r_id = Convert.ToInt32(Session["r_id"].ToString());
+                
                 entities.fs_item.Add(item);
                 entities.SaveChanges();
                 ViewBag.SuccessMessage = "Image uploaded successfully";

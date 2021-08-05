@@ -11,8 +11,7 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class fs_category
     {
@@ -23,15 +22,14 @@ namespace FoodDatabase
         }
     
         public int c_id { get; set; }
-
-        [Required(ErrorMessage = "Required Field"), DisplayName("Category Name")]
         public string c_name { get; set; }
-
-        [Required(ErrorMessage = "Required Field"), DisplayName("Image")]
         public string c_image { get; set; }
         public Nullable<int> c_r_id { get; set; }
         public Nullable<int> c_status { get; set; }
-    
+
+        [NotMapped]
+        public List<fs_restaurant> RestaurantCollection { get; set; }
+
         public virtual fs_restaurant fs_restaurant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fs_item> fs_item { get; set; }

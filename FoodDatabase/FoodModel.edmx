@@ -49,6 +49,7 @@
           <Property Name="r_image" Type="nvarchar(max)" />
           <Property Name="r_password" Type="nvarchar" MaxLength="50" />
           <Property Name="r_status" Type="int" />
+          <Property Name="r_desc" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="fs_user">
           <Key>
@@ -175,6 +176,7 @@
           <Property Name="r_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="r_status" Type="Int32" />
           <NavigationProperty Name="fs_item" Relationship="FoodDatabaseModel.FK__fs_item__i_r_id__32E0915F" FromRole="fs_restaurant" ToRole="fs_item" />
+          <Property Name="r_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="fs_user">
           <Key>
@@ -304,6 +306,7 @@
           <EntitySetMapping Name="fs_restaurant">
             <EntityTypeMapping TypeName="FoodDatabaseModel.fs_restaurant">
               <MappingFragment StoreEntitySet="fs_restaurant">
+                <ScalarProperty Name="r_desc" ColumnName="r_desc" />
                 <ScalarProperty Name="r_status" ColumnName="r_status" />
                 <ScalarProperty Name="r_password" ColumnName="r_password" />
                 <ScalarProperty Name="r_id" ColumnName="r_id" />

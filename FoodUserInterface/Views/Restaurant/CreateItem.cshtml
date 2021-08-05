@@ -6,6 +6,13 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#addCategoryBtn').click(function () {
+            document.location.href = "Create";
+        });
+    });
+</script>
 
 <style>
     .table span {
@@ -36,13 +43,13 @@
         border-radius: 10px;
     }
 
-        input[type = "submit"], #newUserBtn {
+        input[type = "submit"], input[type = "button"], #newUserBtn {
             background-color: #FFD371;
             border: none;
             color: black;
         }
 
-            input[type = "submit"]:hover, #newUserBtn:hover {
+            input[type = "submit"]:hover, input[type = "button"]:hover, #newUserBtn:hover {
                 background-color: #FFB740;
                 color: black;
             }
@@ -55,6 +62,15 @@
             <h2>Add Item</h2>
             <table>
                 <tbody>
+                    <tr>
+                        <td>@Html.LabelFor(model => model.i_c_id)</td>
+                        <td>
+                            @Html.DropDownListFor(model => model.i_c_id, new SelectList(Model.CategoryCollection, "c_id", "c_name"), "Select")
+                        </td>
+                        <td>
+                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_c_id)</span>
+                        </td>
+                    </tr>
                     <tr>
                         <td>@Html.LabelFor(model => model.i_name)</td>
                         <td>@Html.EditorFor(model => model.i_name)</td>
@@ -91,14 +107,16 @@
 
                     <tr>
                         <td>
-                            <input type="submit" class="btn btn-primary" value="Submit" name="name" />
+                            <input type="submit" class="btn btn-primary" value="Create" name="name" />
                         </td>
-
+                        <td>
+                            <input id="addCategoryBtn" type="button" class="btn btn-primary" value="Add Category" name="name" />
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        
+
         <p style="color: red;">@ViewBag.Error</p>
     }
 </div>

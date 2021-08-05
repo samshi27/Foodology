@@ -3,10 +3,16 @@
     ViewBag.Title = "Add Category";
 }
 
-
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#addItemBtn').click(function () {
+            document.location.href = "CreateItem";
+        });
+    });
+</script>
 
 <style>
     .table span {
@@ -37,19 +43,20 @@
         border-radius: 10px;
     }
 
-        input[type = "submit"], #newUserBtn {
+        input[type = "submit"], input[type = "button"], #newUserBtn {
             background-color: #FFD371;
             border: none;
             color: black;
         }
 
-            input[type = "submit"]:hover, #newUserBtn:hover {
+            input[type = "submit"]:hover, input[type = "button"]:hover, #newUserBtn:hover {
                 background-color: #FFB740;
                 color: black;
             }
 </style>
 
 <div>
+    <h2>Session: @Session["r_id"].ToString()</h2>
     @using (Html.BeginForm("Create", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div id="container">
@@ -76,7 +83,11 @@
 
                     <tr>
                         <td>
-                            <input type="submit" class="btn btn-primary" value="Submit" name="name" />
+                            <input type="submit" class="btn btn-primary" value="Create" name="name" />
+                        </td>
+                        
+                        <td>
+                            <input type="button" id ="addItemBtn" class="btn btn-primary" value="Add Item" name="name" />
                         </td>
 
                     </tr>

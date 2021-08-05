@@ -68,9 +68,13 @@ namespace FoodUserInterface.Controllers
             }
         }
 
-        public ActionResult Home()
+        public ActionResult Home(int? page)
         {
-            return View();
+            int pagesize = 6, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = entities.fs_restaurant.Where(model => model.r_status == 1).OrderByDescending(model => model.r_id).ToList();
+            IPagedList<fs_restaurant> stu = list.ToPagedList(pageindex, pagesize);
+            return View(stu);
         }
 
         public ActionResult Index()
