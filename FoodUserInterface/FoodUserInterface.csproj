@@ -204,6 +204,7 @@
     <Content Include="Views\User\ItemDetails.cshtml" />
     <Content Include="Views\User\ViewCategory.cshtml" />
     <Content Include="Views\Restaurant\CreateMenu.cshtml" />
+    <Content Include="Views\Restaurant\DeleteItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

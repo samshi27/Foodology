@@ -1,0 +1,80 @@
+﻿@model FoodDatabase.fs_item
+
+@{
+    ViewBag.Title = "DeleteItem";
+}
+
+<h2>DeleteItem</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>fs_item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.i_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fs_category.c_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fs_category.c_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fs_restaurant.r_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fs_restaurant.r_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

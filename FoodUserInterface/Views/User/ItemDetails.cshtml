@@ -4,10 +4,40 @@
     ViewBag.Title = "ItemDetails";
 }
 
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#button').click(function () {
+            document.location.href = "ViewItem";
+        });
+    });
+</script>
+
 <h2>ItemDetails</h2>
+<style>
+    input {
+        border: 1px solid #cbc9c8;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+        input[type = "button"], #button {
+            background-color: #FFD371;
+            border: none;
+            color: black;
+            font-weight: 500;
+        }
+
+            input[type = "button"]:hover, #button:hover {
+                background-color: #FFB740;
+                color: black;
+            }
+</style>
 
 <div>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.i_name)
@@ -34,22 +64,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.i_image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.i_image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.i_status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.i_status)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.fs_category.c_name)
         </dt>
 
@@ -67,7 +81,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.i_id }) |
-    @Html.ActionLink("Back to List", "ViewItem")
-</p>
+
+<div>
+    <input style="height: 40px;width: 150px; border-radius: 20px;" type="button" name="Add to Cart" value="Add to Cart" />
+</div>
