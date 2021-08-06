@@ -1,0 +1,73 @@
+﻿@model FoodDatabase.fs_item
+
+@{
+    ViewBag.Title = "ItemDetails";
+}
+
+<h2>ItemDetails</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.i_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.i_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.i_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fs_category.c_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fs_category.c_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fs_restaurant.r_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fs_restaurant.r_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.i_id }) |
+    @Html.ActionLink("Back to List", "ViewItem")
+</p>

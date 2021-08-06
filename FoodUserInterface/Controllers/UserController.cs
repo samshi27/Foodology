@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoodDatabase;
-using PagedList;
 using FoodServices.Controllers;
 using System.Web.Security;
 
@@ -68,13 +67,11 @@ namespace FoodUserInterface.Controllers
             }
         }
 
-        public ActionResult Home(int? page)
+        public ActionResult Home()
         {
-            int pagesize = 6, pageindex = 1;
-            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var list = entities.fs_restaurant.Where(model => model.r_status == 1).OrderByDescending(model => model.r_id).ToList();
-            IPagedList<fs_restaurant> stu = list.ToPagedList(pageindex, pagesize);
-            return View(stu);
+            List<fs_restaurant> restaurants = entities.fs_restaurant.Where(model => model.r_status == 1).ToList();
+            
+            return View(restaurants);
         }
 
         public ActionResult Index()
@@ -111,7 +108,6 @@ namespace FoodUserInterface.Controllers
         }
 
         [HttpGet]
-
         public ActionResult Delete(int id)
         {
             var emp = userServices.GetRegUsers(id);
@@ -124,15 +120,23 @@ namespace FoodUserInterface.Controllers
             userServices.Delete(id);
             return RedirectToAction("Index");
         }
-        /*
-        public ActionResult ViewRestaurant(int? page)
-        {
-            int pagesize = 6, pageindex = 1;
-            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
-            var list = entities.fs_restaurant.Where(model => model.r_status == 1).OrderByDescending(model => model.r_id).ToList();
-            IPagedList<fs_restaurant> stu = list.ToPagedList(pageindex, pagesize);
 
-            return View(stu);
-        }*/
+        public ActionResult ViewCategory(int id)
+        {
+            List<fs_category> categories = entities.fs_category.Where(model => model.c_status == 1 && model.c_r_id == id).ToList();
+            return View(categories);
+        }
+        
+        public ActionResult ViewItem(int id)
+        {
+            List<fs_item> items = entities.fs_item.Where(model => model.i_status == 1 && model.i_c_id == id).ToList();
+            return View(items);
+        }
+        
+        public ActionResult ItemDetails(int id)
+        {
+            fs_item item = entities.fs_item.Single(i => i.i_id == id);
+            return View(item);
+        }
     }
 }

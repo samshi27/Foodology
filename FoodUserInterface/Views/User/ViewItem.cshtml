@@ -1,7 +1,12 @@
-﻿@model IEnumerable<FoodDatabase.fs_category>
+﻿@using PagedList.Mvc
+@model IEnumerable<FoodDatabase.fs_item>
 @{
-    ViewBag.Title = "View Categories";
+    ViewBag.Title = "Items";
 }
+
+<link href="~/Content/paginition.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
 
 <style>
     a {
@@ -28,22 +33,14 @@
     }
 </style>
 
-<p>
-    @Html.ActionLink("Create New", "CreateItem", "Restaurant")
-</p>
-
-
 <div class="category-list">
     @foreach (var item in Model)
     {
         <div class="category-wrapper">
             <div class="col-lg-4 col-md-4 text-left" style="height : 200px; margin-top : 100px">
-                <img src="@Url.Content(item.c_image)" style="height : 100%; width : auto; border-radius : 10px" />
+                <img src="@Url.Content(item.i_image)" style="height : 100%; width : auto; border-radius : 10px" />
 
-                <h3>@Html.ActionLink(item.c_name, "ViewItem", new { id = item.c_id })</h3>
-                <div>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.c_id }, new { @class = "btn btn-danger btn-sm" })
-                </div>
+                <h3>@Html.ActionLink(item.i_name, "ItemDetails", new { id = item.i_id })</h3>
             </div>
         </div>
     }

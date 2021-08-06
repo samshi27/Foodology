@@ -15,26 +15,39 @@
 </script>
 
 <style>
-    .table span {
-        color: red !important;
+    .create-wrapper {
+        border: 1px solid #e3e3e3;
+        border-radius: 10px;
+        width: 550px;
+        padding: 50px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 
-    #container {
-        margin-top: 100px;
-    }
-
-    .row img {
+    table {
         width: 100%;
-        border-radius: 20px;
     }
 
-    table span {
-        color: red;
+        table span {
+            color: red;
+            margin: 10px 0;
+        }
+
+        table td {
+            padding: 10px 0;
+        }
+
+    center {
+        margin: 20px 10px;
+        width: 100%;
     }
 
-    table td {
-        padding: 10px 0;
-        padding-right: 60px;
+    .center-flex {
+        width: 100%;
+        display: flex;
     }
 
     input {
@@ -43,80 +56,90 @@
         border-radius: 10px;
     }
 
-        input[type = "submit"], input[type = "button"], #newUserBtn {
-            background-color: #FFD371;
-            border: none;
+        input[type = "text"], input[type = "password"], input[type="file"] {
+            width: 100%;
+            height: 50px;
+        }
+
+        input[type = "button"] {
+            background-color: white;
+            border: 1px solid #cbc9c8;
             color: black;
         }
 
-            input[type = "submit"]:hover, input[type = "button"]:hover, #newUserBtn:hover {
+        input[type = "submit"] {
+            background-color: #FFD371;
+            border: none;
+            color: black;
+            font-weight: 500;
+        }
+
+            input[type = "submit"]:hover, input[type = "submit"]:focus, input[type = "submit"]:active, input[type = "button"]:hover, input[type = "button"]:active, input[type = "button"]:focus {
                 background-color: #FFB740;
                 color: black;
+                border: none;
             }
 </style>
 
-<div>
+<div class="create-wrapper">
     @using (Html.BeginForm("CreateItem", "Restaurant", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div>
-            <h2>Add Item</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>@Html.LabelFor(model => model.i_c_id)</td>
-                        <td>
-                            @Html.DropDownListFor(model => model.i_c_id, new SelectList(Model.CategoryCollection, "c_id", "c_name"), "Select")
-                        </td>
-                        <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_c_id)</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>@Html.LabelFor(model => model.i_name)</td>
-                        <td>@Html.EditorFor(model => model.i_name)</td>
-                        <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_name)</span>
-                        </td>
-                    </tr>
+        <h2>Add Item</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <td>@Html.LabelFor(model => model.i_c_id)</td>
+                    <td>
+                        @Html.DropDownListFor(model => model.i_c_id, new SelectList(Model.CategoryCollection.Where(x => x.c_r_id == int.Parse(Session["r_id"].ToString())), "c_id", "c_name"), "Select")
+                    </td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.i_c_id)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.i_name)</td>
+                    <td>@Html.EditorFor(model => model.i_name)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.i_name)</span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td>@Html.LabelFor(model => model.i_price)</td>
-                        <td>@Html.EditorFor(model => model.i_price)</td>
-                        <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_price)</span>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.i_price)</td>
+                    <td>@Html.EditorFor(model => model.i_price)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.i_price)</span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td>@Html.LabelFor(model => model.i_desc)</td>
-                        <td>@Html.EditorFor(model => model.i_desc)</td>
-                        <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_desc)</span>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.i_desc)</td>
+                    <td>@Html.EditorFor(model => model.i_desc)</td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.i_desc)</span>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td>@Html.LabelFor(model => model.i_image)</td>
-                        <td>
-                            <input type="file" value="" name="imgFile" id="imgFile" />
-                        </td>
-                        <td>
-                            <span class="text-danger">@Html.ValidationMessageFor(model => model.i_image)</span>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@Html.LabelFor(model => model.i_image)</td>
+                    <td>
+                        <input type="file" value="" name="imgFile" id="imgFile" />
+                    </td>
+                    <td>
+                        <span class="text-danger">@Html.ValidationMessageFor(model => model.i_image)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-                    <tr>
-                        <td>
-                            <input type="submit" class="btn btn-primary" value="Create" name="name" />
-                        </td>
-                        <td>
-                            <input id="addCategoryBtn" type="button" class="btn btn-primary" value="Add Category" name="name" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="center-flex">
+            <center>
+                <input style="height: 40px;width: 100%; border-radius: 20px;" type="submit" class="btn btn-primary" value="Add Item" name="name" />
+            </center>
+            <center>
+                <input style="height: 40px;width: 100%; border-radius: 20px;" id="addCategoryBtn" type="button" class="btn btn-primary" value="Add Category" name="name" />
+            </center>
         </div>
-
         <p style="color: red;">@ViewBag.Error</p>
     }
 </div>

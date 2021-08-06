@@ -3,9 +3,7 @@
     ViewBag.Title = "Signup";
 }
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -18,86 +16,172 @@
     </script>
 
     <style>
-        span
-        {
-            color: red !important;
+        html {
+            overflow-x: hidden;
         }
+
+        .signup-wrapper {
+            
+            border: 1px solid #e3e3e3;
+            border-radius: 10px;
+            width: 500px;
+            margin: 100px 0;
+            padding: 50px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        table {
+            width: 100%;
+        }
+
+            table span {
+                color: red;
+                margin: 10px 0;
+            }
+
+            table td {
+                padding: 10px 0;
+            }
+
+        center {
+            margin: 20px 10px;
+            width: 100%;
+        }
+
+        .center-flex
+        {
+            width: 100%;
+            display: flex;
+        }
+
+        input[type = "radio"] {
+            cursor: pointer;
+        }
+
+        input {
+            
+            border: 1px solid #cbc9c8;
+            padding: 5px;
+            border-radius: 10px;
+        }
+            input[type = "text"], input[type = "password"] {
+                width: 100%;
+                height: 50px;
+                
+            }
+
+            input[type = "submit"], input[type = "button"], #newUserBtn {
+                background-color: #FFD371;
+                border: none;
+                color: black;
+                font-weight: 500;
+            }
+
+                input[type = "submit"]:hover, input[type = "submit"]:focus, input[type = "button"]:hover, input[type = "button"]:focus, #newUserBtn:hover {
+                    background-color: #FFB740;
+                    color: black;
+                }
+        .terms-div
+        {
+            cursor: default;
+        }
+        .terms-div span
+        {
+            font-weight: 500;
+        }
+            .terms-div span:hover {
+                cursor: pointer;
+                color: #FFB740;
+            }
+    
     </style>
-</head>
-<body>
-    <h2>Sign Up</h2>
-    <div>
+
+    <div class="signup-wrapper">
+        <h2 style="text-align: left; margin-bottom: 30px;">Sign Up</h2>
         @using (Html.BeginForm(FormMethod.Post))
         {
-            <table class="table">
+            <table>
                 <tbody>
                     <tr>
                         <td>@Html.LabelFor(model => model.u_username)</td>
-                        <td>@Html.TextBoxFor(model => model.u_username)</td>
                         <td>
+                            @Html.TextBoxFor(model => model.u_username) <br />
                             <span>@Html.ValidationMessageFor(model => model.u_username)</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td>@Html.LabelFor(model => model.u_firstname)</td>
-                        <td>@Html.TextBoxFor(model => model.u_firstname)</td>
                         <td>
+                            @Html.TextBoxFor(model => model.u_firstname) <br />
                             <span>@Html.ValidationMessageFor(model => model.u_firstname)</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td>@Html.LabelFor(model => model.u_lastname)</td>
-                        <td>@Html.TextBoxFor(model => model.u_lastname)</td>
                         <td>
+                            @Html.TextBoxFor(model => model.u_lastname) <br />
                             <span>@Html.ValidationMessageFor(model => model.u_lastname)</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td>@Html.LabelFor(model => model.u_gender)</td>
-                        <td>Male @Html.RadioButton("u_gender", "male") Female @Html.RadioButton("u_gender", "Female") Others @Html.RadioButton("u_gender", "Others")</td>
                         <td>
+                            Male @Html.RadioButton("u_gender", "male") Female @Html.RadioButton("u_gender", "Female") Others @Html.RadioButton("u_gender", "Others") <br />
                             <span>@Html.ValidationMessageFor(model => model.u_gender)</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td>@Html.LabelFor(model => model.u_contact)</td>
-                        <td>@Html.TextBoxFor(model => model.u_contact)</td>
                         <td>
+                            @Html.TextBoxFor(model => model.u_contact)<br />
                             <span>@Html.ValidationMessageFor(model => model.u_contact)</span>
+
                         </td>
                     </tr>
 
                     <tr>
                         <td>@Html.LabelFor(model => model.u_email)</td>
-                        <td>@Html.TextBoxFor(model => model.u_email)</td>
                         <td>
+                            @Html.TextBoxFor(model => model.u_email) <br />
                             <span>@Html.ValidationMessageFor(model => model.u_email)</span>
                         </td>
                     </tr>
 
                     <tr>
                         <td>@Html.LabelFor(model => model.u_password)</td>
-                        <td>@Html.PasswordFor(model => model.u_password)</td>
                         <td>
+                            @Html.PasswordFor(model => model.u_password) <br />
                             <span>@Html.ValidationMessageFor(model => model.u_password)</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" class="btn btn-primary" value="Signup" name="name" />
-                        </td>
-                        <td>
-                            <input type="button" id="loginBtn" class="btn btn-primary" value="Login" name="name" />
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="center-flex">
+                <center>
+                    <input style="height: 40px; width: 100%; border-radius: 20px;" type="submit" class="btn btn-primary" value="Sign up" name="name" />
+                </center>
+                <center>
+                    <input style="height: 40px; width: 100%; border-radius: 20px;" type="button" id="loginBtn" class="btn btn-primary" value="Log in" name="name" />
+                </center>
+            </div>
+
+            <div class="terms-div">
+                <p>
+                    By clicking the "Sign up" button, you are creating an account, 
+                    and agree to Foodology's <span>Terms of Service</span> and <span>Privacy Policy</span>.
+                </p>
+            </div>
+            
             <p style="color: red;">@ViewBag.error</p>
         }
     </div>
-</body>
-</html>
+

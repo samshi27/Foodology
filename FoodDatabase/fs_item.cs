@@ -11,15 +11,26 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class fs_item
     {
         public int i_id { get; set; }
+
+        [DisplayName("Item Name")]
         public string i_name { get; set; }
+
+        [DisplayName("Price")]
         public string i_price { get; set; }
+
+        [DisplayName("Description")]
         public string i_desc { get; set; }
+
+        [DisplayName("Category")]
         public Nullable<int> i_c_id { get; set; }
+
+        [DisplayName("Image")]
         public string i_image { get; set; }
         public Nullable<int> i_r_id { get; set; }
         public Nullable<int> i_status { get; set; }

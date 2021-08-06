@@ -11,16 +11,31 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class fs_user
     {
         public int u_id { get; set; }
+
+        [DisplayName("First Name")]
         public string u_firstname { get; set; }
+
+        [DisplayName("Last Name")]
         public string u_lastname { get; set; }
+
+        [DisplayName("Gender")]
         public string u_gender { get; set; }
+
+        [DisplayName("Contact")]
         public string u_contact { get; set; }
+
+        [DisplayName("Email ID")]
         public string u_email { get; set; }
+
+        [DisplayName("User Name")]
         public string u_username { get; set; }
+
+        [DisplayName("Password")]
         public string u_password { get; set; }
     }
 }

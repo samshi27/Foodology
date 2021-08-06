@@ -1,5 +1,5 @@
-﻿@using PagedList.Mvc
-@model PagedList.IPagedList<FoodDatabase.fs_restaurant>
+﻿@using FoodDatabase
+@model IEnumerable<FoodDatabase.fs_restaurant>
 @{
     ViewBag.Title = "Home";
 }
@@ -12,6 +12,21 @@
 </script>
 
 <style>
+
+    a {
+        color: black;
+        z-index: 1000;
+    }
+
+        a:hover {
+            text-decoration: none;
+            color: #FFB740;
+        }
+
+    html
+    {
+        overflow-x: hidden;
+    }
     .image-background {
         position: relative;
         background-color: black;
@@ -36,17 +51,19 @@
             text-align: center;
         }
 
-    .resturant-list {
+
+    .home-wrapper {
+        padding-bottom: 60px;
+    }
+
+    .restaurant-list {
         width: 100%;
         margin: auto;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-    }
-
-    .home-wrapper-items {
-        text-align: left;
+        margin-bottom: 100px;
     }
 </style>
 
@@ -62,21 +79,21 @@
         </p>
     </div>
 </div>
-<div class="resturant-list">
+<div class="restaurant-list">
     @if (Model != null)
     {
-        int i = 1;
-        foreach (var item in Model)
+        foreach (fs_restaurant restaurant in Model)
         {   
             <div class="home-wrapper">
-                <div id =""class="home-wrapper-items" style="height : 200px; margin: 100px 0 0 0; width: 400px;">
-                    <img src="@Url.Content(item.r_image)" style="height : 100%; width : auto; border-radius : 10px" />
-                    <h3>@item.r_name</h3>
-                    <p style="color: gray;">@item.r_desc</p>
-                    <p>@item.r_location</p>
+                <div class="col-lg-4 col-md-4" style="height: 200px; margin-top: 100px; width: 400px;">
+                    <img src="@Url.Content(restaurant.r_image)" style="height : 100%; width : auto; border-radius : 10px" />
+
+                    <h3>@Html.ActionLink(restaurant.r_name, "ViewCategory", new { id = restaurant.r_id })</h3>
+
+                    <p style="color: gray;">@restaurant.r_desc</p>
+                    <p>@restaurant.r_location</p>
                 </div>
             </div>
-            i++;
         }
 
     }

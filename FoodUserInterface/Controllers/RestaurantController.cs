@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoodDatabase;
-using PagedList;
 
 namespace FoodUserInterface.Controllers
 {
@@ -23,11 +22,11 @@ namespace FoodUserInterface.Controllers
         public ActionResult Login(fs_restaurant adm)
         {
 
-            fs_restaurant admin = entities.fs_restaurant.Where(x => x.r_name == adm.r_name && x.r_password == adm.r_password).SingleOrDefault();
+            fs_restaurant admin = entities.fs_restaurant.Where(x => x.r_email == adm.r_email && x.r_password == adm.r_password).SingleOrDefault();
             if (admin != null)
             {
                 Session["r_id"] = admin.r_id.ToString();
-                return RedirectToAction("Create");
+                return RedirectToAction("CreateMenu");
             }
             else
             {
@@ -53,6 +52,15 @@ namespace FoodUserInterface.Controllers
                 return RedirectToAction("Login");
             }
         }
+
+
+        public ActionResult CreateMenu()
+        {
+            return View();
+        }
+
+
+
 
         // ---------------- ADD CATEGORY ---------------------
 
@@ -91,16 +99,47 @@ namespace FoodUserInterface.Controllers
             return View();
         }
 
-        public ActionResult ViewCategory(int? page)
+
+
+        public ActionResult ViewCategory()
         {
+            List<fs_category> categories = entities.fs_category.Where(model => model.c_status == 1).ToList();
+            //List<fs_category> categories = entities.fs_category.Where(model => model.c_status == 1 && model.c_r_id == id).ToList();
+
+            return View(categories);
+        }
+
+        /*
+        public ActionResult ViewCategory(int? id, int? page)
+        {
+
+            if (Session["r_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
             int pagesize = 6, pageindex = 1;
             pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            //var list = entities.fs_category.Where(model => model.c_r_id == id).OrderByDescending(model => model.c_id).ToList();
             var list = entities.fs_category.Where(model => model.c_status == 1).OrderByDescending(model => model.c_id).ToList();
             IPagedList<fs_category> stu = list.ToPagedList(pageindex, pagesize);
 
             return View(stu);
         }
+        
+        
+        [HttpPost]
+        public ActionResult ViewCategory(int? id, int? page, string search)
+        {
 
+            int pagesize = 6, pageindex = 1;
+            pageindex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var list = entities.fs_category.Where(model => model.c_name.Contains(search)).OrderByDescending(model => model.c_id).ToList();
+            IPagedList<fs_category> stu = list.ToPagedList(pageindex, pagesize);
+
+            return View(stu);
+        }
+        */
         // ---------------- END ADD CATEGORY ---------------------
 
 
@@ -115,13 +154,9 @@ namespace FoodUserInterface.Controllers
             }
 
             fs_item itemModel = new fs_item();
-            //fs_category catModel = new fs_category();
             using (FoodDatabaseEntities entities = new FoodDatabaseEntities())
             {
                 itemModel.CategoryCollection = entities.fs_category.ToList<fs_category>();
-                
-
-                //catModel.RestaurantCollection = entities.fs_restaurant.ToList<fs_restaurant>();
             }
              
                 return View(itemModel);
@@ -155,6 +190,7 @@ namespace FoodUserInterface.Controllers
             return View();
         }
 
+        /*
         public ActionResult ViewItem(int? page)
         {
             int pagesize = 6, pageindex = 1;
@@ -164,6 +200,7 @@ namespace FoodUserInterface.Controllers
 
             return View(stu);
         }
+        */
         // ----------------- END ADD ITEM -------------------
         public string uploadingImgFile(HttpPostedFileBase file)
         {

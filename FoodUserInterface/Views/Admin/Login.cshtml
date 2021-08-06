@@ -8,38 +8,57 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 <style>
-    .table span {
-        color: red !important;
+    .login-wrapper {
+        border: 1px solid #e3e3e3;
+        border-radius: 10px;
+        width: 500px;
+        padding: 50px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 
-    #container {
-        margin-top: 100px;
-    }
-
-    .row img {
+    table {
         width: 100%;
-        border-radius: 20px;
     }
 
-    table span {
-        color: red;
+        table span {
+            color: red;
+            margin: 10px 0;
+        }
+
+        table td {
+            padding: 10px 0;
+        }
+
+    center {
+        margin: 20px 10px;
+        width: 100%;
     }
 
-    table td {
-        padding: 10px 0;
-        padding-right: 60px;
+    .center-flex {
+        width: 100%;
+        display: flex;
     }
 
     input {
         border: 1px solid #cbc9c8;
         padding: 5px;
-        border-radius: 10px;
+        border-radius: 5px;
     }
+
+        input[type = "text"], input[type = "password"] {
+            width: 100%;
+            height: 50px;
+        }
 
         input[type = "submit"], #newUserBtn {
             background-color: #FFD371;
             border: none;
             color: black;
+            font-weight: 500;
         }
 
             input[type = "submit"]:hover, #newUserBtn:hover {
@@ -48,36 +67,35 @@
             }
 </style>
 
-<div>
+<div class="login-wrapper">
     @using (Html.BeginForm(FormMethod.Post))
     {
-        <div id="container">
-            <h2>Admin Login</h2>
-            <table>
+        <h2 style="text-align: left; margin-bottom: 30px;">Admin Log in</h2>
+        <table>
             <tbody>
                 <tr>
                     <td>@Html.LabelFor(model => model.a_username)</td>
-                    <td>@Html.TextBoxFor(model => model.a_username)</td>
                     <td>
+                        @Html.TextBoxFor(model => model.a_username)<br />
                         <span>@Html.ValidationMessageFor(model => model.a_username)</span>
                     </td>
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(model => model.a_password)</td>
-                    <td>@Html.PasswordFor(model => model.a_password)</td>
                     <td>
+                        @Html.PasswordFor(model => model.a_password) <br />
                         <span>@Html.ValidationMessageFor(model => model.a_password)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <input type="submit" class="btn btn-primary" value="Login" name="name" />
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
-        
+
+        <div class="center-flex">
+            <center>
+                <input style="height: 40px;width: 100%; border-radius: 20px;" type="submit" class="btn btn-primary" value="Log in" name="name" />
+            </center>
+        </div>
+
         <p style="color: red;">@ViewBag.error</p>
     }
 </div>

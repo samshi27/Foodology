@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FoodDatabase.fs_restaurant>
+
+@{
+    ViewBag.Title = "Restaurants";
+}
+
+<h2>ViewRestaurant</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.r_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fs_admin.a_username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fs_admin.a_username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.r_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.r_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.r_id })
+        </td>
+    </tr>
+}
+
+</table>
