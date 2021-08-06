@@ -99,6 +99,10 @@ namespace FoodUserInterface.Controllers
 
         public ActionResult ViewCategory()
         {
+            if (Session["r_id"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             List<fs_category> categories = entities.fs_category.Where(model => model.c_status == 1).ToList();
 
             return View(categories);
@@ -153,7 +157,7 @@ namespace FoodUserInterface.Controllers
             return View();
         }
 
-        
+        /*
         public ActionResult ViewItem(int? page)
         {
             int pagesize = 6, pageindex = 1;
@@ -163,7 +167,14 @@ namespace FoodUserInterface.Controllers
 
             return View(stu);
         }
+        */
         
+        public ActionResult ViewItem(int id)
+        {
+            List<fs_item> items = entities.fs_item.Where(model => model.i_status == 1 && model.i_c_id == id).ToList();
+            return View(items);
+        }
+
         // ----------------- END ADD ITEM -------------------
         public string uploadingImgFile(HttpPostedFileBase file)
         {
