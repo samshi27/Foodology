@@ -11,6 +11,8 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class fs_category
@@ -22,9 +24,17 @@ namespace FoodDatabase
         }
     
         public int c_id { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Category Name")]
         public string c_name { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Image")]
         public string c_image { get; set; }
+
+        [DisplayName("Restaurant ID")]
         public Nullable<int> c_r_id { get; set; }
+
+        [DisplayName("Status")]
         public Nullable<int> c_status { get; set; }
 
 

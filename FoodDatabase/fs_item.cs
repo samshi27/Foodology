@@ -11,17 +11,34 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class fs_item
     {
+        [DisplayName("Item ID")]
         public int i_id { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Item Name")]
         public string i_name { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Item Price")]
         public string i_price { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Description")]
         public string i_desc { get; set; }
+
+        [DisplayName("Category ID")]
         public Nullable<int> i_c_id { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Upload Image")]
         public string i_image { get; set; }
+
+        [DisplayName("Restaurant ID")]
         public Nullable<int> i_r_id { get; set; }
+
+        [DisplayName("Status")]
         public Nullable<int> i_status { get; set; }
 
         [NotMapped]

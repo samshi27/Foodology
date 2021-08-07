@@ -11,7 +11,9 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class fs_restaurant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,16 +22,35 @@ namespace FoodDatabase
             this.fs_category = new HashSet<fs_category>();
             this.fs_item = new HashSet<fs_item>();
         }
-    
+
+        [DisplayName("Restaurant ID")]
         public int r_id { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Restaurant Name")]
         public string r_name { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Location")]
         public string r_location { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Email Name")]
         public string r_email { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Contact")]
         public string r_contact { get; set; }
+
+        [DisplayName("Admin ID")]
         public Nullable<int> r_a_id { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Upload Image")]
         public string r_image { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Password Name")]
         public string r_password { get; set; }
+
+        [DisplayName("Status")]
         public Nullable<int> r_status { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Description")]
         public string r_desc { get; set; }
     
         public virtual fs_admin fs_admin { get; set; }

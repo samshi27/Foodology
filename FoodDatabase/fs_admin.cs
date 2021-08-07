@@ -11,7 +11,9 @@ namespace FoodDatabase
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class fs_admin
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +23,11 @@ namespace FoodDatabase
         }
     
         public int a_id { get; set; }
+
+        [Required (ErrorMessage = "Required Field."), DisplayName("User Name")]
         public string a_username { get; set; }
+
+        [Required(ErrorMessage = "Required Field."), DisplayName("Password")]
         public string a_password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
