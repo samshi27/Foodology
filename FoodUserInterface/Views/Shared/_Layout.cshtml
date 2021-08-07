@@ -76,6 +76,7 @@
 
                     @if (Session["u_username"] != null)
                     {
+                        <span>@Html.ActionLink("Cart", "Cart", "User")</span>
                         <span>@Html.ActionLink("Logout", "Logout", "User")</span>
                     }
                     else

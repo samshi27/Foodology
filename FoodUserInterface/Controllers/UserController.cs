@@ -138,5 +138,10 @@ namespace FoodUserInterface.Controllers
             fs_item item = entities.fs_item.Single(i => i.i_id == id);
             return View(item);
         }
+
+        public ActionResult Cart()
+        {
+            return View();
+        }
     }
 }
