@@ -14,6 +14,9 @@
         <EntityTypeShape EntityType="FoodDatabaseModel.fs_item" Width="1.5" PointX="7.5" PointY="1.25" />
         <AssociationConnector Association="FoodDatabaseModel.FK__fs_item__i_c_id__31EC6D26" />
         <AssociationConnector Association="FoodDatabaseModel.FK__fs_item__i_r_id__32E0915F" />
+        <EntityTypeShape EntityType="FoodDatabaseModel.fs_order" Width="1.5" PointX="9.75" PointY="3" />
+        <AssociationConnector Association="FoodDatabaseModel.FK__fs_order__o_i_id__37A5467C" />
+        <AssociationConnector Association="FoodDatabaseModel.FK__fs_order__o_u_id__36B12243" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -24,7 +24,7 @@ namespace FoodDatabase
     
         public int a_id { get; set; }
 
-        [Required (ErrorMessage = "Required Field."), DisplayName("User Name")]
+        [Required(ErrorMessage = "Required Field."), DisplayName("User Name")]
         public string a_username { get; set; }
 
         [Required(ErrorMessage = "Required Field."), DisplayName("Password")]

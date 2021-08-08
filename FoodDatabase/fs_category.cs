@@ -37,6 +37,7 @@ namespace FoodDatabase
         [DisplayName("Status")]
         public Nullable<int> c_status { get; set; }
 
+        
 
         public virtual fs_restaurant fs_restaurant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

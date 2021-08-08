@@ -5,19 +5,8 @@
 }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#button").click(function () {
-            var itemid = @Model.i_id;
-            var formData = new FormData();
-            formData.append("ItemId", itemid);
-        });
 
-    });
-</script>
-
-
-<h2>ItemDetails</h2>
+<h2>Item Details</h2>
 <style>
     input {
         border: 1px solid #cbc9c8;
@@ -25,65 +14,78 @@
         border-radius: 5px;
     }
 
-        input[type = "button"], #button {
+        input[type = "submit"]{
             background-color: #FFD371;
             border: none;
             color: black;
             font-weight: 500;
         }
 
-            input[type = "button"]:hover, #button:hover {
+            input[type = "submit"]:hover{
                 background-color: #FFB740;
                 color: black;
             }
 </style>
 
-<div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.i_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.i_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.i_price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.i_price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.i_desc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.i_desc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fs_category.c_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fs_category.c_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fs_restaurant.r_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fs_restaurant.r_name)
-        </dd>
-    </dl>
+@using (Html.BeginForm(FormMethod.Post))
+{ 
     <div>
-        <input itemid="@Model.i_id" id="button" style="height: 40px;width: 150px; border-radius: 20px;" type="button" name="AddToCart" value="Add to Cart" />
+        <input type="hidden" name="id" value="@Model.i_id" />
+        <dl class="dl-horizontal">
+            <dt>
+                Image
+            </dt>
+            <dd>
+                <img src="@Url.Content(Model.i_image)" style="height: 200px; border-radius: 20px;"/>
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.i_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.i_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.i_price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.i_price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.i_desc)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.i_desc)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fs_category.c_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fs_category.c_name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fs_restaurant.r_name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fs_restaurant.r_name)
+            </dd>
+        </dl>
+        <div>
+            <input id="qtyBtn" style="height: 40px;width: 150px; border-radius: 20px;" type="number" name = "qty" placeholder="Qty" min="1" max="10" value="Add to Cart" />
+            <input id="cartBtn" style="height: 40px;width: 150px; border-radius: 20px;" type="submit" name="AddToCart" value="Add to Cart" />
+        </div>
     </div>
-</div>
+}
+    
 
 
 

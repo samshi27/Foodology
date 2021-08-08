@@ -32,7 +32,7 @@ namespace FoodDatabase
         [Required(ErrorMessage = "Required Field."), DisplayName("Location")]
         public string r_location { get; set; }
 
-        [Required(ErrorMessage = "Required Field."), DisplayName("Email Name")]
+        [Required(ErrorMessage = "Required Field."), DisplayName("E-mail ID")]
         public string r_email { get; set; }
 
         [Required(ErrorMessage = "Required Field."), DisplayName("Contact")]
@@ -41,10 +41,10 @@ namespace FoodDatabase
         [DisplayName("Admin ID")]
         public Nullable<int> r_a_id { get; set; }
 
-        [Required(ErrorMessage = "Required Field."), DisplayName("Upload Image")]
+        [Required(ErrorMessage = "Required Field."), DisplayName("Image")]
         public string r_image { get; set; }
 
-        [Required(ErrorMessage = "Required Field."), DisplayName("Password Name")]
+        [Required(ErrorMessage = "Required Field."), DisplayName("Password")]
         public string r_password { get; set; }
 
         [DisplayName("Status")]

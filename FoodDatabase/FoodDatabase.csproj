@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cart.cs" />
     <Compile Include="FoodModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -72,6 +73,9 @@
       <DependentUpon>FoodModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fs_item.cs">
+      <DependentUpon>FoodModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fs_order.cs">
       <DependentUpon>FoodModel.tt</DependentUpon>
     </Compile>
     <Compile Include="fs_restaurant.cs">

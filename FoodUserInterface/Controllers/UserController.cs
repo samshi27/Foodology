@@ -69,6 +69,21 @@ namespace FoodUserInterface.Controllers
 
         public ActionResult Home()
         {
+            if (TempData["cart"] != null)
+            {
+                int x = 0;
+                List<Cart> finalCart = TempData["cart"] as List<Cart>;
+                
+                foreach(var item in finalCart)
+                {
+                    x += item.itemBill;
+                }
+
+                TempData["total"] = x;
+                TempData["item_count"] = finalCart.Count();
+            }
+            TempData.Keep();
+            
             List<fs_restaurant> restaurants = entities.fs_restaurant.Where(model => model.r_status == 1).ToList();
             
             return View(restaurants);
@@ -136,12 +151,128 @@ namespace FoodUserInterface.Controllers
         public ActionResult ItemDetails(int id)
         {
             fs_item item = entities.fs_item.Single(i => i.i_id == id);
+
             return View(item);
+        }
+        
+        [HttpPost]
+        public ActionResult ItemDetails(int id, int qty)
+        {
+            if(Session["u_id"] == null)
+
+            {
+                return RedirectToAction("Login");
+            }
+
+            fs_item item = entities.fs_item.Single(i => i.i_id == id);
+            List<Cart> cartList = new List<Cart>();
+
+
+            Cart cartItem = new Cart
+            {
+                itemId = id,
+                itemName = item.i_name,
+                itemPrice = Convert.ToInt32(item.i_price),
+                itemQty = Convert.ToInt32(qty)
+            };
+
+            cartItem.itemBill = cartItem.itemPrice * cartItem.itemQty;
+            
+            if(TempData["cart"] == null)
+            {
+                cartList.Add(cartItem);
+                TempData["cart"] = cartList;
+            }
+
+            else
+            {
+                List<Cart> cartList2 = TempData["cart"] as List<Cart>;
+                int flag = 0;
+                foreach (var i in cartList2)
+                {
+                    if(i.itemId == cartItem.itemId)
+                    {
+                        i.itemQty += cartItem.itemQty;
+                        i.itemBill += cartItem.itemBill;
+                        flag = 1;
+                    }
+                }
+
+                if(flag == 0)
+                {
+                    cartList2.Add(cartItem);
+                }
+                TempData["cart"] = cartList2;
+            }
+            
+            TempData.Keep();
+            return RedirectToAction("Home");
         }
 
         public ActionResult Cart()
         {
+            TempData.Keep();
             return View();
+        }
+        
+        [HttpPost]
+        public ActionResult Cart(string contact, string address)
+        {
+            if (ModelState.IsValid)
+            {
+                List<Cart> carts = TempData["cart"] as List<Cart>;
+                foreach(var item in carts)
+                {
+                    fs_order order = new fs_order
+                    {
+                        o_i_id = item.itemId,
+                        o_u_id = Convert.ToInt32(Session["u_id"].ToString()),
+                        o_total = (int)TempData["total"],
+                        o_contact = contact,
+                        o_address = address,
+                        o_date = DateTime.Now
+                    };
+                    entities.fs_order.Add(order);
+                    entities.SaveChanges();
+                }
+                TempData.Remove("total");
+                TempData.Remove("cart");
+                TempData["message"] = "Order Booked Successfully.";
+                return RedirectToAction("Cart");
+            }
+            TempData.Keep();
+            return View();
+        }
+
+        public ActionResult Order()
+        {
+            List<fs_order> orders = new List<fs_order>();
+            return View();
+        }
+
+
+        public ActionResult RemoveItem(int? id)
+        {
+            if(TempData["cart"] == null)
+            {
+                TempData.Remove("total");
+                TempData.Remove("cart");
+            }
+            else
+            {
+                List<Cart> carts = TempData["cart"] as List<Cart>;
+                Cart cart = carts.Where(x => x.itemId == id).SingleOrDefault();
+                carts.Remove(cart);
+                int s = 0;
+
+                foreach (var item in carts)
+                {
+                    s += item.itemBill;
+                }
+                TempData["total"] = s;
+            }
+            TempData.Keep();
+            return RedirectToAction("Cart");
         }
     }
 }

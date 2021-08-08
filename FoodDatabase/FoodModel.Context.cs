@@ -30,5 +30,6 @@ namespace FoodDatabase
         public virtual DbSet<fs_restaurant> fs_restaurant { get; set; }
         public virtual DbSet<fs_user> fs_user { get; set; }
         public virtual DbSet<fs_item> fs_item { get; set; }
+        public virtual DbSet<fs_order> fs_order { get; set; }
     }
 }

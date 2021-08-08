@@ -17,7 +17,12 @@ namespace FoodDatabase
 
     public partial class fs_item
     {
-        [DisplayName("Item ID")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public fs_item()
+        {
+            this.fs_order = new HashSet<fs_order>();
+        }
+    
         public int i_id { get; set; }
 
         [Required(ErrorMessage = "Required Field."), DisplayName("Item Name")]
@@ -32,7 +37,7 @@ namespace FoodDatabase
         [DisplayName("Category ID")]
         public Nullable<int> i_c_id { get; set; }
 
-        [Required(ErrorMessage = "Required Field."), DisplayName("Upload Image")]
+        [DisplayName("Image")]
         public string i_image { get; set; }
 
         [DisplayName("Restaurant ID")]
@@ -46,5 +51,7 @@ namespace FoodDatabase
 
         public virtual fs_category fs_category { get; set; }
         public virtual fs_restaurant fs_restaurant { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fs_order> fs_order { get; set; }
     }
 }

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<FoodDatabase.fs_order>
+@{
+    ViewBag.Title = "Order";
+}
+
+<style>
+    .order-wrapper {
+        border: 1px solid #e3e3e3;
+        border-radius: 10px;
+        width: 550px;
+        padding: 50px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    table {
+        width: 100%;
+    }
+
+        table span {
+            color: red;
+            margin: 10px 0;
+        }
+
+        table td {
+            padding: 10px 0;
+        }
+
+</style>
+
+<div class="order-wrapper">
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        <h2 style="text-align: left; margin-bottom: 30px;">My Orders</h2>
+
+        <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Item ID</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Order Date</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.o_id</td>
+                            <td>@item.o_i_id</td>
+                            <td>@item.o_contact</td>
+                            <td>@item.o_address</td>
+                            <td>@item.o_date</td>
+                            <td>Rs. @item.o_total</td>
+                        </tr>
+                    }
+                </tbody>
+        </table>
+    }
+</div>

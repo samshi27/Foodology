@@ -16,6 +16,12 @@ namespace FoodDatabase
 
     public partial class fs_user
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public fs_user()
+        {
+            this.fs_order = new HashSet<fs_order>();
+        }
+
         [DisplayName("User ID")]
         public int u_id { get; set; }
 
@@ -31,7 +37,7 @@ namespace FoodDatabase
         [Required(ErrorMessage = "Required Field."), DisplayName("Contact")]
         public string u_contact { get; set; }
 
-        [Required(ErrorMessage = "Required Field."), DisplayName("Emai ID")]
+        [Required(ErrorMessage = "Required Field."), DisplayName("E-mail ID")]
         public string u_email { get; set; }
 
         [Required(ErrorMessage = "Required Field."), DisplayName("User Name")]
@@ -39,5 +45,8 @@ namespace FoodDatabase
 
         [Required(ErrorMessage = "Required Field."), DisplayName("Password")]
         public string u_password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fs_order> fs_order { get; set; }
     }
 }
